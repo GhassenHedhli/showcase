@@ -1,12 +1,12 @@
-// ─── SMTP Configuration (via smtpjs.com CDN relay) ───────────────────────────
-// smtpjs routes your Gmail SMTP through their proxy — no backend needed.
-// Script loaded in index.html via CDN.
+// ─── Production Backend for Email Relay ──────────────────────────────────────
+// This URL points to your now-live Render backend:
+// https://showcase-f885.onrender.com
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const EMAIL_CONFIG = {
-  HOST: 'smtp.gmail.com',
-  PORT: 587,
-  USERNAME: 'marketbusinessofall@gmail.com',
-  PASSWORD: 'ilqu xofv bqsx uacs',
-  TO: 'marketbusinessofall@gmail.com',
+  // Production URL (with localhost fallback for development)
+  API_URL: import.meta.env.VITE_API_URL || 'https://showcase-f885.onrender.com',
+
+  // Recipient (to keep it organized)
+  TO_EMAIL: 'marketbusinessofall@gmail.com',
 };

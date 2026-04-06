@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
+import { EMAIL_CONFIG } from '../emailConfig';
 
 interface ContactFormProps {
   domainTitle?: string;
@@ -32,9 +33,8 @@ export default function ContactForm({ domainTitle, serviceTitle, accentHex = '#6
     setErrorMsg('');
 
     try {
-      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
-      // Call the relay backend
-      const response = await fetch(`${API_URL}/api/contact`, {
+      // Call the relay backend (configured in emailConfig.ts)
+      const response = await fetch(`${EMAIL_CONFIG.API_URL}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
