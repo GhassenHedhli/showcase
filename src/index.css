@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Google Fonts loaded in index.html ───────────────────────────────────── */
+:root {
+  --primary: 99 102 241;
+}
+
+@layer base {
+  body {
+    @apply antialiased bg-[#020617] text-gray-200 overflow-x-hidden;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  h1, h2, h3, h4, .brand-font {
+    font-family: 'Outfit', sans-serif;
+  }
+  * {
+    @apply scroll-smooth;
+  }
+}
+
+@layer components {
+
+  /* ── Premium Gradient Text ────────────────────────────────────────────── */
+  .premium-gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-white via-gray-200 to-indigo-400;
+  }
+
+  /* ── Glass Card ──────────────────────────────────────────────────────── */
+  .glass-card {
+    @apply relative overflow-hidden bg-gray-900/30 backdrop-blur-3xl border border-white/5 
+           shadow-[0_8px_32px_0_rgba(0,0,0,0.4)] transition-all duration-500 ease-out
+           hover:border-white/10 hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.5)];
+  }
+
+  /* ── Glow Button ─────────────────────────────────────────────────────── */
+  .glow-button {
+    @apply relative isolate flex items-center justify-center gap-2 rounded-2xl 
+           bg-indigo-600 font-extrabold text-white transition-all duration-300 
+           shadow-[0_0_30px_-10px_rgba(79,70,229,0.7)]
+           hover:shadow-[0_0_50px_-5px_rgba(79,70,229,0.8)]
+           hover:bg-indigo-500
+           active:scale-95;
+  }
+
+  /* ── Animated Mesh Gradient Background ──────────────────────────────── */
+  .mesh-bg {
+    @apply pointer-events-none opacity-25 blur-[160px] -z-10;
+    background:
+      radial-gradient(circle at 5%  5%,  #4f46e5 0%, transparent 35%),
+      radial-gradient(circle at 95% 95%, #7c3aed 0%, transparent 35%),
+      radial-gradient(circle at 50% 50%, #312e81 0%, transparent 45%),
+      radial-gradient(circle at 80% 15%, #1d4ed8 0%, transparent 30%);
+    animation: meshShift 25s infinite alternate ease-in-out;
+  }
+
+  /* ── Page Transitions ────────────────────────────────────────────────── */
+  .page-fade-in {
+    animation: fadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  
+  /* Animate slow fade — used on background orbs */
+  .animate-slow-fade {
+    animation: slowFade 8s infinite alternate ease-in-out;
+  }
+}
+
+/* ── Keyframes ────────────────────────────────────────────────────────────── */
+@keyframes meshShift {
+  0%   { transform: scale(1)    translate(0%,   0%); }
+  50%  { transform: scale(1.08) translate(2%,   2%); }
+  100% { transform: scale(1)    translate(-2%, -2%); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slowFade {
+  from { opacity: 0.4; }
+  to   { opacity: 0.9; }
+}
+
+/* ── Custom Scrollbar ─────────────────────────────────────────────────────── */
+::-webkit-scrollbar        { width: 6px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: rgba(99,102,241,0.3); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(99,102,241,0.6); }
+
+/* ── Selection ────────────────────────────────────────────────────────────── */
+::selection { background: rgba(99,102,241,0.35); color: white; }
