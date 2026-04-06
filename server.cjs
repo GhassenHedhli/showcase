@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
@@ -6,14 +7,17 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// SMTP Config (direct from your provided credentials)
+// Load credentials safely from environment variables
+const GMAIL_USER = process.env.GMAIL_USER || 'marketbusinessofall@gmail.com';
+const GMAIL_PASS = process.env.GMAIL_PASS || 'ilqu xofv bqsx uacs';
+
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
   port: 587,
-  secure: false, // true for 465, false for other ports
+  secure: false, 
   auth: {
-    user: 'marketbusinessofall@gmail.com',
-    pass: 'ilqu xofv bqsx uacs', // Gmail App Password
+    user: GMAIL_USER,
+    pass: GMAIL_PASS,
   },
 });
 
@@ -21,8 +25,8 @@ app.post('/api/contact', async (req, res) => {
   const { from_name, from_email, company, interest, message } = req.body;
 
   const mailOptions = {
-    from: `"Inquiry: ${from_name}" <marketbusinessofall@gmail.com>`,
-    to: 'marketbusinessofall@gmail.com',
+    from: `"Inquiry: ${from_name}" <${GMAIL_USER}>`,
+    to: GMAIL_USER,
     replyTo: from_email,
     subject: `New Inquiry: ${interest} - from ${from_name}`,
     html: `
