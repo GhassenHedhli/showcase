@@ -2,7 +2,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { getDomainById, webDevServices } from '../data';
 import Icon from '../components/Icon';
 import ContactForm from '../components/ContactForm';
-import { ChevronLeft, ChevronRight, ArrowRight, CheckCircle2, Home } from 'lucide-react';
+import { ChevronRight, ArrowRight, CheckCircle2, Home } from 'lucide-react';
 
 export default function DomainPage() {
   const { domainId } = useParams<{ domainId: string }>();
