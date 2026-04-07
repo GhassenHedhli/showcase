@@ -4,9 +4,9 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const EMAIL_CONFIG = {
-  // Production URL (with localhost fallback for development)
-  API_URL: import.meta.env.VITE_API_URL || 'https://showcase-f885.onrender.com',
+  // Relative path (preferred for Vercel) or fallback for development
+  API_URL: import.meta.env.VITE_API_URL || '',
 
-  // Recipient (to keep it organized)
+  // Recipient (main business contact)
   TO_EMAIL: 'marketbusinessofall@gmail.com',
 };

@@ -32,24 +32,36 @@ export default function ContactForm({ domainTitle, serviceTitle, accentHex = '#6
     setStatus('loading');
     setErrorMsg('');
 
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s timeout
+
     try {
       // Call the relay backend (configured in emailConfig.ts)
       const response = await fetch(`${EMAIL_CONFIG.API_URL}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
+        signal: controller.signal,
       });
 
+      clearTimeout(timeoutId);
+
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to send email via backend.');
+        const errorData = await response.json().catch(() => ({ error: response.statusText }));
+        throw new Error(errorData.error || `Server returned ${response.status}`);
       }
 
       setStatus('success');
     } catch (err: any) {
+      clearTimeout(timeoutId);
       console.error('[Backend Error]', err);
       setStatus('error');
-      setErrorMsg(err.message || 'The email backend could not be reached. Ensure server.js is running on port 3001.');
+      
+      let msg = err.message || 'The email backend could not be reached.';
+      if (err.name === 'AbortError') {
+        msg = 'Connection timed out. The server is taking too long to respond.';
+      }
+      setErrorMsg(msg);
     }
   };
 

@@ -77,9 +77,9 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
-              { value: '6',    label: 'Expert Domains' },
-              { value: '15+',  label: 'Microservices' },
-              { value: '80+',  label: 'Capabilities' },
+              { value: '8',    label: 'Expert Domains' },
+              { value: '25+',  label: 'Microservices' },
+              { value: '100+', label: 'Capabilities' },
               { value: '100%', label: 'Source-Code Available' },
             ].map(stat => (
               <div key={stat.label}>
