@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useNavigate, Link, useLocation } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import DomainPage from './pages/DomainPage';
@@ -7,11 +7,11 @@ import { Menu, X, ExternalLink } from 'lucide-react';
 
 // ── Nav items ──────────────────────────────────────────────────────────────────
 const NAV_LINKS = [
-  { label: 'Domains',     action: 'scroll-domains' },
+  { label: 'Domains', action: 'scroll-domains' },
   { label: 'Microservices', href: '/domain/web-dev' },
-  { label: 'IoT',          href: '/domain/iot' },
-  { label: 'AI / ML',      href: '/domain/ml-ai' },
-  { label: 'Contact',     action: 'scroll-contact' },
+  { label: 'IoT', href: '/domain/iot' },
+  { label: 'AI / ML', href: '/domain/ml-ai' },
+  { label: 'Contact', action: 'scroll-contact' },
 ];
 
 function Header() {
@@ -132,11 +132,11 @@ function Footer() {
             <ul className="space-y-2">
               {[
                 { label: 'Web Development', path: '/domain/web-dev' },
-                { label: 'IoT Solutions',   path: '/domain/iot' },
-                { label: 'Mobile Dev',      path: '/domain/mobile' },
-                { label: 'Power BI & ETL',  path: '/domain/bi-etl' },
-                { label: 'ML / AI',         path: '/domain/ml-ai' },
-                { label: 'DevOps',          path: '/domain/devops' },
+                { label: 'IoT Solutions', path: '/domain/iot' },
+                { label: 'Mobile Dev', path: '/domain/mobile' },
+                { label: 'Power BI & ETL', path: '/domain/bi-etl' },
+                { label: 'ML / AI', path: '/domain/ml-ai' },
+                { label: 'DevOps', path: '/domain/devops' },
               ].map(link => (
                 <li key={link.path}>
                   <button
@@ -176,10 +176,22 @@ function Footer() {
   );
 }
 
+// ─── Scroll To Top Helper ───────────────────────────────────────────────────────
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
 // ── App Root ───────────────────────────────────────────────────────────────────
 function AppInner() {
   return (
     <div className="min-h-screen bg-[#020617] text-gray-100 flex flex-col font-sans">
+      <ScrollToTop />
       {/* Mesh BG */}
       <div className="mesh-bg fixed inset-0 pointer-events-none" />
       {/* Noise grain overlay */}
@@ -190,9 +202,9 @@ function AppInner() {
 
       <main className="flex-grow pt-20 relative z-10">
         <Routes>
-          <Route path="/"                    element={<HomePage />} />
-          <Route path="/domain/:domainId"    element={<DomainPage />} />
-          <Route path="/service/:serviceId"  element={<ServiceDetails />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/domain/:domainId" element={<DomainPage />} />
+          <Route path="/service/:serviceId" element={<ServiceDetails />} />
           {/* Redirect old route */}
           <Route path="*" element={
             <div className="min-h-[60vh] flex flex-col items-center justify-center gap-6 text-center px-6">
