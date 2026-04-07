@@ -64,7 +64,7 @@ function Header() {
         {/* CTA */}
         <div className="flex items-center gap-3">
           <a
-            href="http://localhost:5173"
+            href="https://showcase-nu-orcin.vercel.app/"
             target="_blank"
             rel="noreferrer"
             className="hidden sm:flex items-center gap-2 px-5 py-2.5 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-white font-bold text-sm transition-all duration-200 backdrop-blur-md"
