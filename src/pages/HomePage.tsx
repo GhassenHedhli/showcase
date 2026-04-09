@@ -3,9 +3,15 @@ import { domains } from '../data';
 import type { Domain } from '../data';
 import Icon from '../components/Icon';
 import ContactForm from '../components/ContactForm';
+import Carousel from '../components/Carousel';
+
+import dashboardImg from '../assets/showcase/dashboard.png';
+import ecommerceImg from '../assets/showcase/ecommerce.png';
+import iotImg from '../assets/showcase/iot.png';
+
 import {
   Layers, ArrowRight, Shield, Zap, Globe2, CheckCircle2,
-  Users, Star, ChevronDown,
+  Users, Star, ChevronDown, Monitor, ShoppingBag, Cpu
 } from 'lucide-react';
 
 export default function HomePage() {
@@ -114,6 +120,46 @@ export default function HomePage() {
               />
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── Implementation Showcase ───────────────────────────────────────── */}
+      <section className="py-24 border-t border-white/5 bg-slate-950/20">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div>
+              <p className="text-sm font-bold uppercase tracking-[0.25em] text-indigo-400 mb-4">Real-World Execution</p>
+              <h2 className="text-4xl md:text-5xl font-black tracking-tight">
+                Work Showcase
+              </h2>
+            </div>
+            <p className="text-gray-400 text-lg max-w-md">
+              A glimpse into production-grade implementations across our core technology domains.
+            </p>
+          </div>
+
+          <Carousel 
+            items={[
+              {
+                title: "Enterprise Admin Control Center",
+                description: "A centralized management hub with real-time KPI tracking, user moderation tools, and automated audit logging for high-scale microservice architectures.",
+                image: dashboardImg,
+                tag: "Web Development"
+              },
+              {
+                title: "Premium Ecommerce Engine",
+                description: "High-performance storefront implementation featuring advanced product filtering, real-time stock validation, and seamless Stripe integration.",
+                image: ecommerceImg,
+                tag: "E-Commerce"
+              },
+              {
+                title: "Industrial Telemetry Hub",
+                description: "Scalable IoT infrastructure processing millions of sensor events with sub-10ms latency and real-time visual monitoring dashboards.",
+                image: iotImg,
+                tag: "IoT & Industry 4.0"
+              }
+            ]}
+          />
         </div>
       </section>
 

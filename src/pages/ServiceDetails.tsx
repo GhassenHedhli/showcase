@@ -3,7 +3,12 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { getServiceById, getDomainById } from '../data';
 import Icon from '../components/Icon';
 import ContactForm from '../components/ContactForm';
+import Carousel from '../components/Carousel';
 import { ChevronLeft, ChevronRight, CheckCircle2, Home } from 'lucide-react';
+
+import dashboardImg from '../assets/showcase/dashboard.png';
+import ecommerceImg from '../assets/showcase/ecommerce.png';
+import iotImg from '../assets/showcase/iot.png';
 
 const WEB_DEV_ACCENT = '#6366f1';
 
@@ -104,6 +109,34 @@ export default function ServiceDetails() {
               </span>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── Implementation Preview ────────────────────────────────────────── */}
+      <section className="py-12 border-b border-white/5">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="mb-10">
+            <h2 className="text-2xl font-black text-white mb-2">Implementation Preview</h2>
+            <p className="text-gray-400">Visualizing the service in a production environment.</p>
+          </div>
+          
+          <Carousel 
+            items={[
+              {
+                title: `${service.title} UI`,
+                description: `A production implementation of the ${service.title} module, featuring a responsive interface and real-time data integration.`,
+                image: (service.id === 'ecommerce' || service.id === 'payments') ? ecommerceImg : (service.id === 'iot-hub-ui') ? iotImg : dashboardImg,
+                tag: "Showcase"
+              },
+              {
+                title: "Dark Mode Optimization",
+                description: "All services are built with a premium dark-mode-first aesthetic, ensuring high contrast and optimal user experience.",
+                image: dashboardImg,
+                tag: "Aesthetics"
+              }
+            ]}
+            accentColor={WEB_DEV_ACCENT}
+          />
         </div>
       </section>
 

@@ -2,7 +2,12 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { getDomainById, webDevServices } from '../data';
 import Icon from '../components/Icon';
 import ContactForm from '../components/ContactForm';
+import Carousel from '../components/Carousel';
 import { ChevronRight, ArrowRight, CheckCircle2, Home } from 'lucide-react';
+
+import dashboardImg from '../assets/showcase/dashboard.png';
+import ecommerceImg from '../assets/showcase/ecommerce.png';
+import iotImg from '../assets/showcase/iot.png';
 
 export default function DomainPage() {
   const { domainId } = useParams<{ domainId: string }>();
@@ -113,6 +118,39 @@ export default function DomainPage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── Expertise Showcase ────────────────────────────────────────────── */}
+      <section className="py-16 border-b border-white/5 bg-black/10">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row items-end justify-between gap-6 mb-12">
+            <div>
+              <p className="text-sm font-bold uppercase tracking-[0.25em] text-gray-500 mb-4" style={{ color: `${domain.accentHex}aa` }}>Field Evidence</p>
+              <h2 className="text-4xl font-black text-white">Expertise Showcase</h2>
+            </div>
+            <p className="text-gray-400 text-sm max-w-xs md:text-right">
+              Explore actual implementations and high-fidelity prototypes developed within the {domain.title} domain.
+            </p>
+          </div>
+
+          <Carousel 
+            items={[
+              {
+                title: `${domain.title} Implementation`,
+                description: `High-fidelity demonstration of our capabilities within the ${domain.title} ecosystem.`,
+                image: domain.id === 'iot' ? iotImg : domain.id === 'web-dev' ? ecommerceImg : dashboardImg,
+                tag: "Real Work"
+              },
+              {
+                title: "Scalable Architecture",
+                description: "Built for million-user scale with distributed caching, service discovery, and automated horizontal scaling.",
+                image: dashboardImg,
+                tag: "Performance"
+              }
+            ]}
+            accentColor={domain.accentHex}
+          />
         </div>
       </section>
 
