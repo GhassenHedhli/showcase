@@ -11,7 +11,7 @@ import iotImg from '../assets/showcase/iot.png';
 
 import {
   Layers, ArrowRight, Shield, Zap, Globe2, CheckCircle2,
-  Users, Star, ChevronDown, Monitor, ShoppingBag, Cpu
+  Users, Star, ChevronDown
 } from 'lucide-react';
 
 export default function HomePage() {
