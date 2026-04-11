@@ -10,7 +10,7 @@ import dashboardImg from '../assets/showcase/dashboard.png';
 import ecommerceImg from '../assets/showcase/ecommerce.png';
 import iotImg from '../assets/showcase/iot.png';
 
-const WEB_DEV_ACCENT = '#6366f1';
+const WEB_DEV_ACCENT = '#06b6d4';
 
 const tiers = [
   {

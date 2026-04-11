@@ -4,25 +4,25 @@ const SQUADS = [
   {
     name: 'Fintech Squad',
     icon: <Shield className="w-8 h-8" />,
-    color: 'from-indigo-600 to-blue-500',
+    color: 'from-cyan-500 to-blue-600',
     desc: 'Ledger integrity & Secure Payments'
   },
   {
     name: 'AI Lab',
     icon: <BrainCircuit className="w-8 h-8" />,
-    color: 'from-purple-600 to-indigo-500',
+    color: 'from-purple-500 to-fuchsia-600',
     desc: 'LLM Orchestration & Neural Search'
   },
   {
     name: 'Cloud Infra',
     icon: <LayoutGrid className="w-8 h-8" />,
-    color: 'from-blue-600 to-cyan-500',
+    color: 'from-blue-600 to-cyan-400',
     desc: 'K8s Scaling & Edge Resilience'
   },
   {
     name: 'Mobile UX',
     icon: <Smartphone className="w-8 h-8" />,
-    color: 'from-pink-600 to-purple-500',
+    color: 'from-fuchsia-500 to-rose-500',
     desc: 'Native Performance & Fluid UI'
   }
 ];
@@ -41,7 +41,7 @@ export default function SquadSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {SQUADS.map((squad) => (
             <div key={squad.name} className="group relative glass-card p-0.5 rounded-3xl transition-all duration-500 hover:scale-[1.02]">
-              <div className="p-8 rounded-[22px] bg-[#020617]/40 backdrop-blur-3xl h-full flex flex-col">
+              <div className="p-8 rounded-[22px] bg-[#0a0a14]/60 backdrop-blur-3xl h-full flex flex-col">
                 {/* Abstract Icon Backdrop */}
                 <div className={`w-16 h-16 rounded-2xl bg-gradient-to-tr ${squad.color} flex items-center justify-center mb-6 shadow-lg group-hover:rotate-6 transition-transform duration-300 relative`}>
                   <div className="text-white drop-shadow-md relative z-10">

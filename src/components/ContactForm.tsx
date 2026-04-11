@@ -8,7 +8,7 @@ interface ContactFormProps {
   accentHex?: string;
 }
 
-export default function ContactForm({ domainTitle, serviceTitle, accentHex = '#6366f1' }: ContactFormProps) {
+export default function ContactForm({ domainTitle, serviceTitle, accentHex = '#06b6d4' }: ContactFormProps) {
   const [form, setForm] = useState({
     from_name: '',
     from_email: '',
@@ -102,7 +102,8 @@ export default function ContactForm({ domainTitle, serviceTitle, accentHex = '#6
             value={form.from_name}
             onChange={handleChange}
             placeholder="John Doe"
-            className="w-full bg-black/40 border-2 border-gray-800 rounded-xl py-3.5 px-4 text-sm text-white focus:outline-none focus:border-indigo-500 transition-all placeholder:text-gray-600"
+            style={{ borderColor: form.from_name ? accentHex + '50' : '' }}
+            className="w-full bg-black/40 border-2 border-gray-800 rounded-xl py-3.5 px-4 text-sm text-white focus:outline-none transition-all placeholder:text-gray-600 focus:ring-1"
           />
         </div>
         <div>
@@ -113,7 +114,8 @@ export default function ContactForm({ domainTitle, serviceTitle, accentHex = '#6
             value={form.from_email}
             onChange={handleChange}
             placeholder="john@example.com"
-            className="w-full bg-black/40 border-2 border-gray-800 rounded-xl py-3.5 px-4 text-sm text-white focus:outline-none focus:border-indigo-500 transition-all placeholder:text-gray-600"
+            style={{ borderColor: form.from_email ? accentHex + '50' : '' }}
+            className="w-full bg-black/40 border-2 border-gray-800 rounded-xl py-3.5 px-4 text-sm text-white focus:outline-none transition-all placeholder:text-gray-600 focus:ring-1"
           />
         </div>
       </div>
@@ -126,7 +128,8 @@ export default function ContactForm({ domainTitle, serviceTitle, accentHex = '#6
           value={form.company}
           onChange={handleChange}
           placeholder="Acme Corp"
-          className="w-full bg-black/40 border-2 border-gray-800 rounded-xl py-3.5 px-4 text-sm text-white focus:outline-none focus:border-indigo-500 transition-all placeholder:text-gray-600"
+          style={{ borderColor: form.company ? accentHex + '50' : '' }}
+          className="w-full bg-black/40 border-2 border-gray-800 rounded-xl py-3.5 px-4 text-sm text-white focus:outline-none transition-all placeholder:text-gray-600 focus:ring-1"
         />
       </div>
 
@@ -139,7 +142,8 @@ export default function ContactForm({ domainTitle, serviceTitle, accentHex = '#6
             value={form.interest}
             onChange={handleChange}
             placeholder="e.g. Web Dev, IoT, AI/ML..."
-            className="w-full bg-black/40 border-2 border-gray-800 rounded-xl py-3.5 px-4 text-sm text-white focus:outline-none focus:border-indigo-500 transition-all placeholder:text-gray-600"
+            style={{ borderColor: form.interest ? accentHex + '50' : '' }}
+            className="w-full bg-black/40 border-2 border-gray-800 rounded-xl py-3.5 px-4 text-sm text-white focus:outline-none transition-all placeholder:text-gray-600 focus:ring-1"
           />
         </div>
       )}
@@ -164,7 +168,8 @@ export default function ContactForm({ domainTitle, serviceTitle, accentHex = '#6
           onChange={handleChange}
           rows={4}
           placeholder="Describe your requirements..."
-          className="w-full bg-black/40 border-2 border-gray-800 rounded-xl py-3.5 px-4 text-sm text-white focus:outline-none focus:border-indigo-500 transition-all resize-none placeholder:text-gray-600"
+          style={{ borderColor: form.message ? accentHex + '50' : '' }}
+          className="w-full bg-black/40 border-2 border-gray-800 rounded-xl py-3.5 px-4 text-sm text-white focus:outline-none transition-all resize-none placeholder:text-gray-600 focus:ring-1"
         />
       </div>
 

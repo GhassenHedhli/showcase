@@ -22,14 +22,14 @@ export default function HomePage() {
       <section className="relative pt-44 pb-32 overflow-hidden">
         {/* Orbs */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden -z-10">
-          <div className="absolute top-[-5%] left-[-10%] w-[60%] h-[60%] bg-indigo-600/12 blur-[140px] rounded-full" />
-          <div className="absolute bottom-[0%] right-[-5%] w-[40%] h-[40%] bg-purple-700/10 blur-[120px] rounded-full" />
-          <div className="absolute top-[30%] left-[50%] w-[30%] h-[30%] bg-blue-600/8 blur-[100px] rounded-full" />
+          <div className="absolute top-[-5%] left-[-10%] w-[60%] h-[60%] bg-cyan-600/15 blur-[140px] rounded-full" />
+          <div className="absolute bottom-[0%] right-[-5%] w-[40%] h-[40%] bg-fuchsia-700/12 blur-[120px] rounded-full" />
+          <div className="absolute top-[30%] left-[50%] w-[30%] h-[30%] bg-purple-600/10 blur-[100px] rounded-full" />
         </div>
 
         <div className="max-w-6xl mx-auto px-6 text-center relative z-10">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-400/25 text-indigo-300 text-sm font-semibold mb-10 backdrop-blur-md">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-400/25 text-cyan-300 text-sm font-semibold mb-10 backdrop-blur-md">
             <Layers className="w-4 h-4" />
             Enterprise Technology Solutions · Tunisia
           </div>
@@ -99,7 +99,7 @@ export default function HomePage() {
       <section id="domains" className="py-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <p className="text-sm font-bold uppercase tracking-[0.25em] text-indigo-400 mb-4">Our Expertise</p>
+            <p className="text-sm font-bold uppercase tracking-[0.25em] text-cyan-400 mb-4">Our Expertise</p>
             <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-5">
               Choose Your Domain
             </h2>
@@ -126,7 +126,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div>
-              <p className="text-sm font-bold uppercase tracking-[0.25em] text-indigo-400 mb-4">Real-World Execution</p>
+              <p className="text-sm font-bold uppercase tracking-[0.25em] text-cyan-400 mb-4">Real-World Execution</p>
               <h2 className="text-4xl md:text-5xl font-black tracking-tight">
                 Work Showcase
               </h2>
@@ -170,7 +170,7 @@ export default function HomePage() {
               },
             ].map(item => (
               <div key={item.title} className="glass-card rounded-3xl p-8 flex flex-col gap-5">
-                <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
+                <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400">
                   {item.icon}
                 </div>
                 <div>
@@ -210,8 +210,8 @@ export default function HomePage() {
             and had a production storefront running in under two weeks."
           </blockquote>
           <div className="flex items-center justify-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center">
-              <Users className="w-5 h-5 text-indigo-400" />
+            <div className="w-10 h-10 rounded-full bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center">
+              <Users className="w-5 h-5 text-cyan-400" />
             </div>
             <div className="text-left">
               <div className="font-bold text-white text-sm">Enterprise Client</div>
@@ -230,7 +230,7 @@ export default function HomePage() {
       <section id="contact" className="py-24 border-t border-white/5">
         <div className="max-w-2xl mx-auto px-6">
           <div className="text-center mb-10">
-            <p className="text-sm font-bold uppercase tracking-[0.25em] text-indigo-400 mb-4">Get In Touch</p>
+            <p className="text-sm font-bold uppercase tracking-[0.25em] text-cyan-400 mb-4">Get In Touch</p>
             <h2 className="text-4xl font-black mb-4">Ready to deploy?</h2>
             <p className="text-gray-400">
               Tell us your requirements. We'll match you with the right modules and prepare a technical briefing.

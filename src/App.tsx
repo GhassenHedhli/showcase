@@ -37,12 +37,12 @@ function Header() {
   };
 
   return (
-    <header className="fixed top-0 w-full z-50 bg-[#020617]/50 backdrop-blur-3xl border-b border-white/5">
+    <header className="fixed top-0 w-full z-50 bg-[#05050a]/50 backdrop-blur-3xl border-b border-white/5">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-indigo-400 flex items-center justify-center shadow-[0_0_18px_rgba(99,102,241,0.5)] group-hover:scale-110 transition-transform duration-300">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-purple-500 flex items-center justify-center shadow-[0_0_18px_rgba(6,182,212,0.5)] group-hover:scale-110 transition-transform duration-300">
             <span className="font-black text-xl text-white italic tracking-tighter">P</span>
           </div>
           <span className="font-black text-xl tracking-tight premium-gradient-text hidden sm:block">PlatformEx</span>
@@ -85,7 +85,7 @@ function Header() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="md:hidden bg-[#020617]/95 backdrop-blur-3xl border-t border-white/5 px-6 py-4 flex flex-col gap-1">
+        <div className="md:hidden bg-[#05050a]/95 backdrop-blur-3xl border-t border-white/5 px-6 py-4 flex flex-col gap-1">
           {NAV_LINKS.map(item => (
             <button
               key={item.label}
@@ -118,7 +118,7 @@ function Footer() {
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center text-white font-black italic text-lg">P</div>
+              <div className="w-9 h-9 rounded-xl bg-cyan-600 flex items-center justify-center text-white font-black italic text-lg">P</div>
               <span className="font-black text-xl text-white">Platform Excellence</span>
             </div>
             <p className="text-gray-500 text-sm leading-relaxed max-w-xs">
@@ -158,7 +158,7 @@ function Footer() {
               <li>
                 <button
                   onClick={() => { navigate('/'); setTimeout(() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }), 200); }}
-                  className="text-indigo-400 hover:text-indigo-300 transition-colors font-semibold"
+                  className="text-cyan-400 hover:text-cyan-300 transition-colors font-semibold"
                 >
                   Send a message →
                 </button>
@@ -190,7 +190,7 @@ function ScrollToTop() {
 // ── App Root ───────────────────────────────────────────────────────────────────
 function AppInner() {
   return (
-    <div className="min-h-screen bg-[#020617] text-gray-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-[#05050a] text-gray-100 flex flex-col font-sans">
       <ScrollToTop />
       {/* Mesh BG */}
       <div className="mesh-bg fixed inset-0 pointer-events-none" />
@@ -210,7 +210,7 @@ function AppInner() {
             <div className="min-h-[60vh] flex flex-col items-center justify-center gap-6 text-center px-6">
               <div className="text-8xl font-black text-gray-800">404</div>
               <h2 className="text-2xl font-bold">Page not found</h2>
-              <Link to="/" className="text-indigo-400 hover:underline">← Back to home</Link>
+              <Link to="/" className="text-cyan-400 hover:underline">← Back to home</Link>
             </div>
           } />
         </Routes>
