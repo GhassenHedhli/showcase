@@ -258,8 +258,12 @@ function DomainCard({ domain, index, onClick }: { domain: Domain; index: number;
 
   return (
     <button
-      onClick={onClick}
-      className="group text-left rounded-[28px] transition-all duration-500 hover:-translate-y-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
+      onClick={domain.comingSoon ? undefined : onClick}
+      className={`group text-left rounded-[28px] transition-all duration-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 ${
+        domain.comingSoon
+          ? 'cursor-not-allowed opacity-80'
+          : 'hover:-translate-y-2'
+      }`}
       style={{
         animationDelay: `${index * 80}ms`,
         transform: 'translateY(0)',
@@ -269,19 +273,29 @@ function DomainCard({ domain, index, onClick }: { domain: Domain; index: number;
         className="relative h-full rounded-[28px] bg-gray-900/70 backdrop-blur-xl flex flex-col overflow-hidden"
         style={{ border: `1px solid ${domain.accentHex}30` }}
       >
+        {domain.comingSoon && (
+          <div className="absolute inset-0 z-50 bg-black/40 backdrop-blur-[1px] flex items-center justify-center rounded-[28px]">
+            <div className="bg-gray-900 border border-white/10 px-6 py-2 rounded-full shadow-2xl flex items-center">
+              <span className="text-white font-bold tracking-widest uppercase text-sm opacity-90 text-center w-full">Coming Soon</span>
+            </div>
+          </div>
+        )}
+
         {/* Color bar */}
         <div className={`h-1 w-full bg-gradient-to-r ${colors[index % colors.length]}`} />
 
         {/* Hover glow */}
-        <div
-          className="absolute top-0 right-0 w-56 h-56 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-3xl rounded-full pointer-events-none"
-          style={{ background: domain.glowColor, top: '-30px', right: '-30px' }}
-        />
+        {!domain.comingSoon && (
+          <div
+            className="absolute top-0 right-0 w-56 h-56 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-3xl rounded-full pointer-events-none"
+            style={{ background: domain.glowColor, top: '-30px', right: '-30px' }}
+          />
+        )}
 
         <div className="p-8 flex flex-col gap-6 relative z-10 flex-grow">
           {/* Icon */}
           <div
-            className="w-14 h-14 rounded-2xl flex items-center justify-center transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3"
+            className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-transform duration-500 ${!domain.comingSoon ? 'group-hover:scale-110 group-hover:rotate-3' : ''}`}
             style={{ background: `${domain.accentHex}18`, border: `1px solid ${domain.accentHex}35` }}
           >
             <Icon name={domain.iconName} size={26} color={domain.accentHex} />
@@ -301,12 +315,18 @@ function DomainCard({ domain, index, onClick }: { domain: Domain; index: number;
             >
               {domain.badge}
             </span>
-            <span
-              className="text-sm font-bold flex items-center gap-1 group-hover:gap-2.5 transition-all duration-300"
-              style={{ color: domain.accentHex }}
-            >
-              Explore <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </span>
+            {!domain.comingSoon ? (
+              <span
+                className="text-sm font-bold flex items-center gap-1 group-hover:gap-2.5 transition-all duration-300"
+                style={{ color: domain.accentHex }}
+              >
+                Explore <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </span>
+            ) : (
+              <span className="text-sm font-bold flex items-center gap-1 text-gray-500">
+                Coming Soon
+              </span>
+            )}
           </div>
         </div>
       </div>
