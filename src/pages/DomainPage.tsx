@@ -3,11 +3,8 @@ import { getDomainById, webDevServices } from '../data';
 import Icon from '../components/Icon';
 import ContactForm from '../components/ContactForm';
 import Carousel from '../components/Carousel';
+import { getShowcaseItems } from '../showcaseData';
 import { ChevronRight, ArrowRight, CheckCircle2, Home } from 'lucide-react';
-
-import dashboardImg from '../assets/showcase/dashboard.png';
-import ecommerceImg from '../assets/showcase/ecommerce.png';
-import iotImg from '../assets/showcase/iot.png';
 
 export default function DomainPage() {
   const { domainId } = useParams<{ domainId: string }>();
@@ -30,6 +27,7 @@ export default function DomainPage() {
   const isWebDev = domain.id === 'web-dev';
   const services = isWebDev ? webDevServices : [];
   const capabilities = !isWebDev ? (domain.capabilities ?? []) : [];
+  const carouselItems = getShowcaseItems(domain.id);
 
   return (
     <div className="w-full page-fade-in">
@@ -135,20 +133,7 @@ export default function DomainPage() {
           </div>
 
           <Carousel 
-            items={[
-              {
-                title: `${domain.title} Implementation`,
-                description: `High-fidelity demonstration of our capabilities within the ${domain.title} ecosystem.`,
-                image: domain.id === 'iot' ? iotImg : domain.id === 'web-dev' ? ecommerceImg : dashboardImg,
-                tag: "Real Work"
-              },
-              {
-                title: "Scalable Architecture",
-                description: "Built for million-user scale with distributed caching, service discovery, and automated horizontal scaling.",
-                image: dashboardImg,
-                tag: "Performance"
-              }
-            ]}
+            items={carouselItems}
             accentColor={domain.accentHex}
           />
         </div>

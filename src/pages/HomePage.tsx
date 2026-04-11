@@ -4,15 +4,13 @@ import type { Domain } from '../data';
 import Icon from '../components/Icon';
 import ContactForm from '../components/ContactForm';
 import Carousel from '../components/Carousel';
-
-import dashboardImg from '../assets/showcase/dashboard.png';
-import ecommerceImg from '../assets/showcase/ecommerce.png';
-import iotImg from '../assets/showcase/iot.png';
+import { globalShowcaseItems } from '../showcaseData';
 
 import {
   Layers, ArrowRight, Shield, Zap, Globe2, CheckCircle2,
   Users, Star, ChevronDown
 } from 'lucide-react';
+import SquadSection from '../components/SquadSection';
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -139,26 +137,7 @@ export default function HomePage() {
           </div>
 
           <Carousel 
-            items={[
-              {
-                title: "Enterprise Admin Control Center",
-                description: "A centralized management hub with real-time KPI tracking, user moderation tools, and automated audit logging for high-scale microservice architectures.",
-                image: dashboardImg,
-                tag: "Web Development"
-              },
-              {
-                title: "Premium Ecommerce Engine",
-                description: "High-performance storefront implementation featuring advanced product filtering, real-time stock validation, and seamless Stripe integration.",
-                image: ecommerceImg,
-                tag: "E-Commerce"
-              },
-              {
-                title: "Industrial Telemetry Hub",
-                description: "Scalable IoT infrastructure processing millions of sensor events with sub-10ms latency and real-time visual monitoring dashboards.",
-                image: iotImg,
-                tag: "IoT & Industry 4.0"
-              }
-            ]}
+            items={globalShowcaseItems}
           />
         </div>
       </section>
@@ -241,6 +220,11 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+
+
+      {/* ── Engineering Squads ────────────────────────────────────────────── */}
+      <SquadSection />
 
       {/* ── Contact ───────────────────────────────────────────────────────── */}
       <section id="contact" className="py-24 border-t border-white/5">

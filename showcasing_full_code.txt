@@ -1,0 +1,2673 @@
+﻿============================================================
+FILE: E:\Platform_dev_tool_Onboarding\showcasing\eslint.config.js
+============================================================
+import js from '@eslint/js'
+import globals from 'globals'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import tseslint from 'typescript-eslint'
+import { defineConfig, globalIgnores } from 'eslint/config'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      js.configs.recommended,
+      tseslint.configs.recommended,
+      reactHooks.configs.flat.recommended,
+      reactRefresh.configs.vite,
+    ],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+    },
+  },
+])
+
+
+============================================================
+FILE: E:\Platform_dev_tool_Onboarding\showcasing\index.html
+============================================================
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO -->
+    <title>PlatformEx Â· Enterprise Microservice Licensing</title>
+    <meta name="description" content="Production-ready microservices, AI/ML tooling, IoT infrastructure, DevOps solutions, and advanced BI/ETL pipelines. License exactly the modules your business needs." />
+    <meta name="keywords" content="microservices, enterprise software, IoT, AI, machine learning, DevOps, Spring Boot, React, Tunisia, software licensing" />
+    <meta name="author" content="Platform Excellence" />
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type"        content="website" />
+    <meta property="og:title"       content="PlatformEx Â· Enterprise Microservice Licensing" />
+    <meta property="og:description" content="6 technology domains. 80+ production capabilities. License exactly what your business needs." />
+    <meta property="og:image"       content="/og-image.png" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content="PlatformEx Â· Enterprise Microservice Licensing" />
+    <meta name="twitter:description" content="Production-ready microservices and AI tooling for enterprise applications." />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
+
+============================================================
+FILE: E:\Platform_dev_tool_Onboarding\showcasing\tsconfig.app.json
+============================================================
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2023",
+    "useDefineForClassFields": true,
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "types": ["vite/client"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": ["src"]
+}
+
+
+============================================================
+FILE: E:\Platform_dev_tool_Onboarding\showcasing\tsconfig.json
+============================================================
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
+}
+
+
+============================================================
+FILE: E:\Platform_dev_tool_Onboarding\showcasing\tsconfig.node.json
+============================================================
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    "target": "ES2023",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "types": ["node"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": ["vite.config.ts"]
+}
+
+
+============================================================
+FILE: E:\Platform_dev_tool_Onboarding\showcasing\vite.config.ts
+============================================================
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react()],
+  build: {
+    chunkSizeWarningLimit: 1000,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor': ['react', 'react-dom', 'react-router-dom', 'lucide-react'],
+        }
+      }
+    }
+  }
+})
+
+
+============================================================
+FILE: E:\Platform_dev_tool_Onboarding\showcasing\package.json
+============================================================
+{
+  "name": "showcasing",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@emailjs/browser": "^4.4.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.1",
+    "express": "^5.2.1",
+    "lucide-react": "^1.7.0",
+    "nodemailer": "^8.0.4",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-router-dom": "^7.14.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.4",
+    "@types/node": "^24.12.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.19",
+    "eslint": "^9.39.4",
+    "eslint-plugin-react-hooks": "^5.1.0-rc.0",
+    "eslint-plugin-react-refresh": "^0.4.12",
+    "globals": "^17.4.0",
+    "postcss": "^8.4.41",
+    "tailwindcss": "^3.4.10",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.57.0",
+    "vite": "^5.4.1"
+  }
+}
+
+
+============================================================
+FILE: E:\Platform_dev_tool_Onboarding\showcasing\tailwind.config.js
+============================================================
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+
+
+============================================================
+FILE: E:\Platform_dev_tool_Onboarding\showcasing\postcss.config.js
+============================================================
+export default {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}
+
+
+============================================================
+FILE: E:\Platform_dev_tool_Onboarding\showcasing\server.cjs
+============================================================
+require('dotenv').config();
+const express = require('express');
+const nodemailer = require('nodemailer');
+const cors = require('cors');
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+// Load credentials safely from environment variables
+const GMAIL_USER = process.env.GMAIL_USER || 'marketbusinessofall@gmail.com';
+const GMAIL_PASS = process.env.GMAIL_PASS || 'ilqu xofv bqsx uacs';
+
+const transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  port: 587,
+  secure: false, 
+  auth: {
+    user: GMAIL_USER,
+    pass: GMAIL_PASS,
+  },
+});
+
+app.post('/api/contact', async (req, res) => {
+  const { from_name, from_email, company, interest, message } = req.body;
+
+  const mailOptions = {
+    from: `"Inquiry: ${from_name}" <${GMAIL_USER}>`,
+    to: GMAIL_USER,
+    replyTo: from_email,
+    subject: `New Inquiry: ${interest} - from ${from_name}`,
+    html: `
+      <h3>New Inquiry from Showcasing Platform</h3>
+      <p><strong>Name:</strong> ${from_name}</p>
+      <p><strong>Email:</strong> ${from_email}</p>
+      <p><strong>Company:</strong> ${company || 'N/A'}</p>
+      <p><strong>Area of Interest:</strong> ${interest}</p>
+      <p><strong>Message:</strong></p>
+      <div style="background: #f4f4f4; padding: 15px; border-radius: 8px;">
+        ${message.replace(/\n/g, '<br/>')}
+      </div>
+    `,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    res.status(200).json({ message: 'Email sent successfully!' });
+  } catch (error) {
+    console.error('Nodemailer Error:', error);
+    res.status(500).json({ error: error.message || 'Failed to send email.' });
+  }
+});
+
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`Email Relay Backend running on port ${PORT}`);
+});
+
+
+============================================================
+FILE: E:\Platform_dev_tool_Onboarding\showcasing\vercel.json
+============================================================
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
+
+
+============================================================
+FILE: E:\Platform_dev_tool_Onboarding\showcasing\src\App.css
+============================================================
+/* App.css intentionally left empty â€” all styles are in index.css */
+
+
+============================================================
+FILE: E:\Platform_dev_tool_Onboarding\showcasing\src\App.tsx
+============================================================
+import { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useNavigate, Link, useLocation } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import DomainPage from './pages/DomainPage';
+import ServiceDetails from './pages/ServiceDetails';
+import { Menu, X, ExternalLink } from 'lucide-react';
+
+// â”€â”€ Nav items â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+const NAV_LINKS = [
+  { label: 'Domains', action: 'scroll-domains' },
+  { label: 'Microservices', href: '/domain/web-dev' },
+  { label: 'IoT', href: '/domain/iot' },
+  { label: 'AI / ML', href: '/domain/ml-ai' },
+  { label: 'Contact', action: 'scroll-contact' },
+];
+
+function Header() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isHome = location.pathname === '/';
+
+  const handleNavClick = (item: { label: string; href?: string; action?: string }) => {
+    setMobileOpen(false);
+    if (item.href) {
+      navigate(item.href);
+      return;
+    }
+    if (item.action === 'scroll-domains') {
+      if (!isHome) { navigate('/'); setTimeout(() => document.getElementById('domains')?.scrollIntoView({ behavior: 'smooth' }), 200); }
+      else document.getElementById('domains')?.scrollIntoView({ behavior: 'smooth' });
+    }
+    if (item.action === 'scroll-contact') {
+      if (!isHome) { navigate('/'); setTimeout(() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }), 200); }
+      else document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <header className="fixed top-0 w-full z-50 bg-[#020617]/50 backdrop-blur-3xl border-b border-white/5">
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-3 group">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-indigo-400 flex items-center justify-center shadow-[0_0_18px_rgba(99,102,241,0.5)] group-hover:scale-110 transition-transform duration-300">
+            <span className="font-black text-xl text-white italic tracking-tighter">P</span>
+          </div>
+          <span className="font-black text-xl tracking-tight premium-gradient-text hidden sm:block">PlatformEx</span>
+        </Link>
+
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex items-center gap-1">
+          {NAV_LINKS.map(item => (
+            <button
+              key={item.label}
+              onClick={() => handleNavClick(item)}
+              className="px-4 py-2 rounded-lg text-sm font-semibold text-gray-400 hover:text-white hover:bg-white/5 transition-all duration-200"
+            >
+              {item.label}
+            </button>
+          ))}
+        </nav>
+
+        {/* CTA */}
+        <div className="flex items-center gap-3">
+          <a
+            href="https://showcase-nu-orcin.vercel.app/"
+            target="_blank"
+            rel="noreferrer"
+            className="hidden sm:flex items-center gap-2 px-5 py-2.5 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-white font-bold text-sm transition-all duration-200 backdrop-blur-md"
+          >
+            Portal Access <ExternalLink className="w-3.5 h-3.5 text-gray-400" />
+          </a>
+
+          {/* Hamburger */}
+          <button
+            onClick={() => setMobileOpen(prev => !prev)}
+            className="md:hidden p-2 rounded-lg hover:bg-white/5 text-gray-400 hover:text-white transition-colors"
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {mobileOpen && (
+        <div className="md:hidden bg-[#020617]/95 backdrop-blur-3xl border-t border-white/5 px-6 py-4 flex flex-col gap-1">
+          {NAV_LINKS.map(item => (
+            <button
+              key={item.label}
+              onClick={() => handleNavClick(item)}
+              className="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5 transition-all"
+            >
+              {item.label}
+            </button>
+          ))}
+          <a
+            href="http://localhost:5173"
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center gap-2 px-4 py-3 mt-2 rounded-xl border border-white/10 bg-white/5 text-white font-bold text-sm"
+          >
+            Portal Access <ExternalLink className="w-3.5 h-3.5 text-gray-400" />
+          </a>
+        </div>
+      )}
+    </header>
+  );
+}
+
+function Footer() {
+  const navigate = useNavigate();
+  return (
+    <footer className="border-t border-white/5 py-14 bg-black/30 backdrop-blur-md">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+          {/* Brand */}
+          <div className="md:col-span-2">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center text-white font-black italic text-lg">P</div>
+              <span className="font-black text-xl text-white">Platform Excellence</span>
+            </div>
+            <p className="text-gray-500 text-sm leading-relaxed max-w-xs">
+              Enterprise-grade microservices, AI tooling, IoT infrastructure, and DevOps solutions. License what you need. Own what you buy.
+            </p>
+          </div>
+
+          {/* Services */}
+          <div>
+            <h4 className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-4">Domains</h4>
+            <ul className="space-y-2">
+              {[
+                { label: 'Web Development', path: '/domain/web-dev' },
+                { label: 'IoT Solutions', path: '/domain/iot' },
+                { label: 'Mobile Dev', path: '/domain/mobile' },
+                { label: 'Power BI & ETL', path: '/domain/bi-etl' },
+                { label: 'ML / AI', path: '/domain/ml-ai' },
+                { label: 'DevOps', path: '/domain/devops' },
+              ].map(link => (
+                <li key={link.path}>
+                  <button
+                    onClick={() => navigate(link.path)}
+                    className="text-sm text-gray-400 hover:text-white transition-colors"
+                  >
+                    {link.label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h4 className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-4">Contact</h4>
+            <ul className="space-y-3 text-sm text-gray-400">
+              <li>Tunisia Â· Available Worldwide</li>
+              <li>
+                <button
+                  onClick={() => { navigate('/'); setTimeout(() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }), 200); }}
+                  className="text-indigo-400 hover:text-indigo-300 transition-colors font-semibold"
+                >
+                  Send a message â†’
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-600">
+          <span>Â© 2026 Platform Excellence Â· All rights reserved.</span>
+          <span>Microservice Licensing Infrastructure Â· Tunisia</span>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+// â”€â”€â”€ Scroll To Top Helper â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
+// â”€â”€ App Root â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function AppInner() {
+  return (
+    <div className="min-h-screen bg-[#020617] text-gray-100 flex flex-col font-sans">
+      <ScrollToTop />
+      {/* Mesh BG */}
+      <div className="mesh-bg fixed inset-0 pointer-events-none" />
+      {/* Noise grain overlay */}
+      <div className="fixed inset-0 pointer-events-none opacity-[0.025] z-[1]"
+        style={{ backgroundImage: "url('https://www.transparenttextures.com/patterns/asfalt-light.png')" }} />
+
+      <Header />
+
+      <main className="flex-grow pt-20 relative z-10">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/domain/:domainId" element={<DomainPage />} />
+          <Route path="/service/:serviceId" element={<ServiceDetails />} />
+          {/* Redirect old route */}
+          <Route path="*" element={
+            <div className="min-h-[60vh] flex flex-col items-center justify-center gap-6 text-center px-6">
+              <div className="text-8xl font-black text-gray-800">404</div>
+              <h2 className="text-2xl font-bold">Page not found</h2>
+              <Link to="/" className="text-indigo-400 hover:underline">â† Back to home</Link>
+            </div>
+          } />
+        </Routes>
+      </main>
+
+      <Footer />
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppInner />
+    </BrowserRouter>
+  );
+}
+
+
+============================================================
+FILE: E:\Platform_dev_tool_Onboarding\showcasing\src\index.css
+============================================================
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* â”€â”€ Google Fonts loaded in index.html â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+:root {
+  --primary: 99 102 241;
+}
+
+@layer base {
+  body {
+    @apply antialiased bg-[#020617] text-gray-200 overflow-x-hidden;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  h1, h2, h3, h4, .brand-font {
+    font-family: 'Outfit', sans-serif;
+  }
+  * {
+    @apply scroll-smooth;
+  }
+}
+
+@layer components {
+
+  /* â”€â”€ Premium Gradient Text â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  .premium-gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-white via-gray-200 to-indigo-400;
+  }
+
+  /* â”€â”€ Glass Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  .glass-card {
+    @apply relative overflow-hidden bg-gray-900/30 backdrop-blur-3xl border border-white/5 
+           shadow-[0_8px_32px_0_rgba(0,0,0,0.4)] transition-all duration-500 ease-out
+           hover:border-white/10 hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.5)];
+  }
+
+  /* â”€â”€ Glow Button â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  .glow-button {
+    @apply relative isolate flex items-center justify-center gap-2 rounded-2xl 
+           bg-indigo-600 font-extrabold text-white transition-all duration-300 
+           shadow-[0_0_30px_-10px_rgba(79,70,229,0.7)]
+           hover:shadow-[0_0_50px_-5px_rgba(79,70,229,0.8)]
+           hover:bg-indigo-500
+           active:scale-95;
+  }
+
+  /* â”€â”€ Animated Mesh Gradient Background â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  .mesh-bg {
+    @apply pointer-events-none opacity-25 blur-[160px] -z-10;
+    background:
+      radial-gradient(circle at 5%  5%,  #4f46e5 0%, transparent 35%),
+      radial-gradient(circle at 95% 95%, #7c3aed 0%, transparent 35%),
+      radial-gradient(circle at 50% 50%, #312e81 0%, transparent 45%),
+      radial-gradient(circle at 80% 15%, #1d4ed8 0%, transparent 30%);
+    animation: meshShift 25s infinite alternate ease-in-out;
+  }
+
+  /* â”€â”€ Page Transitions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  .page-fade-in {
+    animation: fadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  
+  /* Animate slow fade â€” used on background orbs */
+  .animate-slow-fade {
+    animation: slowFade 8s infinite alternate ease-in-out;
+  }
+}
+
+/* â”€â”€ Keyframes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+@keyframes meshShift {
+  0%   { transform: scale(1)    translate(0%,   0%); }
+  50%  { transform: scale(1.08) translate(2%,   2%); }
+  100% { transform: scale(1)    translate(-2%, -2%); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slowFade {
+  from { opacity: 0.4; }
+  to   { opacity: 0.9; }
+}
+
+/* â”€â”€ Custom Scrollbar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+::-webkit-scrollbar        { width: 6px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: rgba(99,102,241,0.3); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(99,102,241,0.6); }
+
+/* â”€â”€ Selection â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+::selection { background: rgba(99,102,241,0.35); color: white; }
+
+
+============================================================
+FILE: E:\Platform_dev_tool_Onboarding\showcasing\src\main.tsx
+============================================================
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.tsx'
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
+
+
+============================================================
+FILE: E:\Platform_dev_tool_Onboarding\showcasing\src\data.ts
+============================================================
+// â”€â”€â”€ Core Data Models â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+export interface Capability {
+  iconName: string;
+  title: string;
+  description: string;
+}
+
+export interface Service {
+  id: string;
+  title: string;
+  shortDesc: string;
+  fullDesc: string;
+  iconName: string;
+  features: string[];
+  basePrice: number;
+  techStack: string[];
+}
+
+export interface Domain {
+  id: string;
+  title: string;
+  tagline: string;
+  description: string;
+  iconName: string;
+  gradient: string;       // Tailwind gradient classes for card
+  glowColor: string;      // CSS rgba for box-shadow glow
+  accentHex: string;      // Hex for inline styles
+  badge: string;          // e.g. "15 Microservices"
+  stats: { value: string; label: string }[];
+  techStack: string[];
+  capabilities?: Capability[];
+  serviceIds?: string[];  // only for web-dev
+}
+
+// â”€â”€â”€ Web Dev Microservices â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+export const webDevServices: Service[] = [
+  {
+    id: 'auth',
+    title: 'Authentication & Authorization',
+    shortDesc: 'Enterprise-grade JWT, OAuth2, 2FA, RBAC, and session management.',
+    fullDesc: 'A battle-tested authentication backbone built with Spring Security. Supports JWT with refresh-token rotation, OAuth2 social login, multi-device session tracking, TOTP-based 2FA, and granular role-based access control. Integrates seamlessly with every other service in the stack.',
+    iconName: 'ShieldCheck',
+    features: ['JWT & Refresh-token rotation', 'OAuth2 / Google login', 'TOTP Two-Factor Auth', 'RBAC with custom roles', 'Device & session registry', 'Brute-force protection', 'Password strength API'],
+    basePrice: 350,
+    techStack: ['Spring Security', 'JWT', 'Redis', 'PostgreSQL'],
+  },
+  {
+    id: 'user-profile',
+    title: 'User & Profile Service',
+    shortDesc: 'Complete user lifecycle: profiles, preferences, privacy, and data exports.',
+    fullDesc: 'Manages the full user object beyond authentication. Covers editable profiles with avatar upload, granular privacy settings, locale/timezone preferences, GDPR-compliant data export, and account deletion pipelines. Exposes public profile APIs for inter-service use.',
+    iconName: 'UserCircle',
+    features: ['Editable public profiles', 'Privacy controls', 'Locale & timezone settings', 'GDPR data export', 'Account deletion pipeline', 'Public profile API', 'Preference management'],
+    basePrice: 200,
+    techStack: ['Spring Boot', 'MongoDB', 'AWS S3'],
+  },
+  {
+    id: 'ecommerce',
+    title: 'Ecommerce Engine',
+    shortDesc: 'Full product catalog, shopping cart, order orchestration, and inventory.',
+    fullDesc: 'A production-ready ecommerce backbone with horizontally-scalable product catalogues, real-time stock validation, CDN-ready image delivery, and a complete cart â†’ order â†’ fulfillment pipeline. Supports categories, SKUs, tags, and paginated search.',
+    iconName: 'ShoppingCart',
+    features: ['Product catalog & SKUs', 'Real-time stock validation', 'Cart state management', 'Order orchestration pipeline', 'CDN image integration', 'Category & tag search', 'Admin product CRUD'],
+    basePrice: 450,
+    techStack: ['Spring Boot', 'MongoDB', 'Redis', 'Stripe'],
+  },
+  {
+    id: 'chat',
+    title: 'Real-Time Chat',
+    shortDesc: 'WebSocket / STOMP messaging with rooms, typing indicators, and history.',
+    fullDesc: 'Inject enterprise-grade real-time messaging into any application. Uses STOMP over WebSocket for sub-millisecond delivery. Supports public/private rooms, direct messages, presence tracking (online/typing), and persistent message history.',
+    iconName: 'MessageSquare',
+    features: ['STOMP / WebSocket transport', 'Public & private rooms', 'Direct messaging', 'Typing & presence indicators', 'Message history', 'Room management API', 'Admin moderation tools'],
+    basePrice: 300,
+    techStack: ['Spring WebSocket', 'STOMP', 'MongoDB', 'Redis Pub/Sub'],
+  },
+  {
+    id: 'payments',
+    title: 'Payment Orchestrator',
+    shortDesc: 'Stripe-native billing, PCI-compliant webhooks, subscriptions & refunds.',
+    fullDesc: 'A fully Stripe-integrated payment engine that removes all PCI-compliance burden. Manages payment intents, secure webhook signature verification, subscription tiers, automated receipts, and admin-level refund operationsâ€”entirely via REST.',
+    iconName: 'CreditCard',
+    features: ['Stripe native integration', 'Webhook signature verification', 'Subscription & billing tiers', 'Automated receipts', 'Admin refund API', 'Analytics & revenue reporting', 'Multi-currency support'],
+    basePrice: 500,
+    techStack: ['Spring Boot', 'Stripe SDK', 'MongoDB', 'Webhooks'],
+  },
+  {
+    id: 'ai-wrapper',
+    title: 'AI/ML Inference Wrapper',
+    shortDesc: 'Rate-limited LLM proxy with caching, RAG pipelines, and recommendation engine.',
+    fullDesc: 'A secure, production-grade proxy for LLM models. Features inference caching, rate limiting, prompt injection protection, pre-built RAG pipelines, and a recommendation engine. Plug in your API keys and instantly unlock AI capabilities in your app.',
+    iconName: 'BrainCircuit',
+    features: ['Multi-LLM proxy (GPT, Gemini)', 'Inference response caching', 'Prompt injection protection', 'Pre-built RAG pipeline', 'Recommendation engine', 'Text summarization API', 'Rate limiting per user'],
+    basePrice: 650,
+    techStack: ['Python FastAPI', 'LangChain', 'OpenAI SDK', 'Redis'],
+  },
+  {
+    id: 'tasks',
+    title: 'Task Management Engine',
+    shortDesc: 'Kanban boards, subtasks, sprint tracking, and collaborative assignments.',
+    fullDesc: 'An enterprise-grade project management backend. Supports full Kanban workflows with configurable statuses, subtask hierarchies, attachments, comments, tag-based filtering, assignee management, and deadline notifications. Ideal for SaaS project tracking.',
+    iconName: 'LayoutList',
+    features: ['Kanban board & states', 'Subtask hierarchies', 'Collaborative assignments', 'Deadline notifications', 'Comments & attachments', 'Tag-based filtering', 'Sprint audit history'],
+    basePrice: 250,
+    techStack: ['Spring Boot', 'MongoDB', 'WebSocket', 'MinIO'],
+  },
+  {
+    id: 'portfolio',
+    title: 'Portfolio & Projects',
+    shortDesc: 'User project portfolios with rich metadata, skills, and public sharing.',
+    fullDesc: 'Allows users to build and publish rich project portfolios. Each project supports descriptions, tech stack tags, image galleries, live links, and completion status. Exposes public APIs for embedding portfolios in external sites.',
+    iconName: 'FolderKanban',
+    features: ['Project CRUD API', 'Tech stack tagging', 'Image gallery support', 'Public portfolio URLs', 'Skills & competency tracking', 'Social sharing metadata', 'Project search & filtering'],
+    basePrice: 180,
+    techStack: ['Spring Boot', 'MongoDB', 'AWS S3'],
+  },
+  {
+    id: 'file-upload',
+    title: 'File Storage Service',
+    shortDesc: 'Chunked upload, CDN delivery, public share links, and storage quotas.',
+    fullDesc: 'A full-featured file service with chunked upload support, thumbnail generation for images, CDN-ready delivery URLs, per-user storage quota enforcement, time-limited public share link generation, and file metadata search.',
+    iconName: 'FolderOpen',
+    features: ['Chunked & resumable upload', 'Thumbnail generation', 'CDN delivery URLs', 'Per-user quota management', 'Public share links (TTL)', 'MIME-type validation', 'Admin file registry'],
+    basePrice: 220,
+    techStack: ['Spring Boot', 'MinIO / AWS S3', 'ImageMagick'],
+  },
+  {
+    id: 'admin',
+    title: 'Admin Control Center',
+    shortDesc: 'Real-time KPI dashboard, user moderation, broadcast messaging, and audit.',
+    fullDesc: 'A WebSocket-powered admin service aggregating cross-platform metrics in real time. Manage users, moderate chats, update order statuses, issue refunds, and broadcast platform-wide notifications â€” all from a single secured admin API.',
+    iconName: 'LayoutDashboard',
+    features: ['Real-time KPI aggregation', 'User management & moderation', 'Chat room admin controls', 'Order & payment management', 'Global broadcast via WebSocket', 'Service health monitoring', 'Multi-service data aggregation'],
+    basePrice: 300,
+    techStack: ['Spring Boot', 'WebSocket', 'Redis', 'Feign Client'],
+  },
+  {
+    id: 'api-gateway',
+    title: 'API Gateway',
+    shortDesc: 'Centralized routing, JWT validation, CORS, rate limiting, and SSL termination.',
+    fullDesc: 'The single entry point for all platform traffic. Handles dynamic routing to microservices, JWT authentication validation, CORS policy enforcement, global rate limiting, SSL termination, and request/response logging â€” with zero-downtime configuration updates.',
+    iconName: 'Network',
+    features: ['Dynamic microservice routing', 'JWT validation layer', 'Global CORS enforcement', 'Rate limiting per client', 'SSL termination', 'Request logging & tracing', 'Circuit breaker integration'],
+    basePrice: 400,
+    techStack: ['Spring Cloud Gateway', 'Redis', 'SSL/TLS'],
+  },
+  {
+    id: 'discovery',
+    title: 'Service Discovery',
+    shortDesc: 'Eureka-based service registry with health checks and auto-deregistration.',
+    fullDesc: 'A Netflix Eureka-powered service registry that allows all microservices to dynamically locate each other without hardcoded URLs. Features automatic health checks, deregistration of failed instances, and a dashboard UI for monitoring registered services.',
+    iconName: 'Radar',
+    features: ['Dynamic service registration', 'Eureka dashboard UI', 'Automatic health checks', 'Failed-instance deregistration', 'Load balancing support', 'Multi-zone awareness', 'Client-side discovery'],
+    basePrice: 150,
+    techStack: ['Spring Cloud Eureka', 'Spring Boot', 'Docker'],
+  },
+  {
+    id: 'email-notif',
+    title: 'Email & Notifications',
+    shortDesc: 'Transactional email delivery with templates, queuing, and delivery tracking.',
+    fullDesc: 'A dedicated notification service that handles all outbound communication. Sends transactional emails (verification, reset, receipts) using HTML templates, queues messages for async delivery, and tracks open/delivery rates. Extensible to SMS and push notifications.',
+    iconName: 'Mail',
+    features: ['HTML email templates', 'Async delivery queuing', 'Email verification flow', 'Password reset emails', 'Order & receipt confirmations', 'Delivery status tracking', 'SMTP provider abstraction'],
+    basePrice: 180,
+    techStack: ['Spring Mail', 'RabbitMQ', 'SMTP', 'Thymeleaf'],
+  },
+  {
+    id: 'iot-hub-ui',
+    title: 'IoT Hub Interface',
+    shortDesc: 'Virtual device management, telemetry SSE streaming, and real-time visualization.',
+    fullDesc: 'A web-based IoT control plane that manages virtual device registries, streams real-time telemetry via Server-Sent Events, and visualizes live sensor data. Supports configurable device behaviors (sine-wave, random-walk) and JSON-based device configuration uploads.',
+    iconName: 'Cpu',
+    features: ['Virtual device registry', 'Real-time SSE telemetry', 'Live telemetry visualization', 'JSON device config upload', 'Configurable sensor behaviors', 'Fleet dashboard view', 'Historical data export'],
+    basePrice: 350,
+    techStack: ['Spring Boot', 'SSE', 'MongoDB', 'React'],
+  },
+  {
+    id: 'analytics',
+    title: 'Analytics & Reporting',
+    shortDesc: 'Aggregated business KPIs, revenue charts, user growth, and export APIs.',
+    fullDesc: 'A cross-service analytics aggregator that pulls metrics from every service and exposes clean KPI endpoints. Powers admin dashboards with user growth, revenue trends, order funnels, and chat activity. Supports scheduled report generation and CSV export.',
+    iconName: 'BarChart2',
+    features: ['Cross-service KPI aggregation', 'User growth analytics', 'Revenue & payment trends', 'Order funnel visualization', 'Chat activity metrics', 'Scheduled report generation', 'CSV export API'],
+    basePrice: 280,
+    techStack: ['Spring Boot', 'MongoDB Aggregation', 'Redis', 'Feign'],
+  },
+];
+
+// â”€â”€â”€ Domain Definitions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+export const domains: Domain[] = [
+  {
+    id: 'web-dev',
+    title: 'Web Development',
+    tagline: 'Plug-and-play microservices for your web platform',
+    description: 'A complete ecosystem of 15 production-ready microservices covering auth, billing, messaging, AI, file storage, and more. Buy exactly the modules your application needs.',
+    iconName: 'Globe',
+    gradient: 'from-indigo-600 via-blue-600 to-indigo-800',
+    glowColor: 'rgba(99,102,241,0.35)',
+    accentHex: '#6366f1',
+    badge: '15 Microservices',
+    stats: [
+      { value: '15', label: 'Microservices' },
+      { value: '250â€“650', label: 'TND / Module' },
+      { value: '100%', label: 'REST API Coverage' },
+      { value: 'Zero', label: 'Vendor Lock-in' },
+    ],
+    techStack: ['Spring Boot', 'React', 'MongoDB', 'Redis', 'Docker', 'JWT', 'Stripe', 'Spring Cloud'],
+    serviceIds: webDevServices.map(s => s.id),
+  },
+
+  {
+    id: 'iot',
+    title: 'IoT Solutions',
+    tagline: 'Connect, monitor, and control your physical world',
+    description: 'End-to-end IoT infrastructure that handles millions of device events in real time. From edge device management through MQTT ingestion to live telemetry dashboards and predictive alerting.',
+    iconName: 'Cpu',
+    gradient: 'from-emerald-600 via-teal-600 to-emerald-800',
+    glowColor: 'rgba(16,185,129,0.35)',
+    accentHex: '#10b981',
+    badge: '12 Capabilities',
+    stats: [
+      { value: '1M+', label: 'Events / Day' },
+      { value: '<10ms', label: 'Telemetry Latency' },
+      { value: '3', label: 'Protocols Supported' },
+      { value: '99.9%', label: 'Uptime SLA' },
+    ],
+    techStack: ['MQTT', 'Spring Boot', 'InfluxDB', 'Grafana', 'Docker', 'Kafka', 'WebSocket', 'Node-RED'],
+    capabilities: [
+      { iconName: 'Server',         title: 'Device Registry & Management',    description: 'Centralized registry for all connected hardware. Register, configure, deactivate, and monitor entire fleets of devices through a unified API.' },
+      { iconName: 'Activity',       title: 'Real-Time Telemetry Streaming',   description: 'SSE and WebSocket-based data pipes that stream sensor readings directly to dashboards with millisecond latency.' },
+      { iconName: 'Radio',          title: 'MQTT / HTTP / CoAP Gateway',      description: 'Protocol translation gateway that speaks MQTT, HTTP, CoAP, and AMQP, normalizing all traffic into a unified internal event format.' },
+      { iconName: 'Zap',            title: 'Alert & Threshold Engine',        description: 'Rule-based alerting that fires email, SMS, or webhook notifications when sensor values cross configurable thresholds.' },
+      { iconName: 'Globe',          title: 'Digital Twin Simulation',         description: 'Virtual replicas of physical devices for pre-deployment testing, what-if simulation, and shadow mode validation without touching real hardware.' },
+      { iconName: 'BarChart2',      title: 'Live Telemetry Dashboards',       description: 'Pre-built Grafana-compatible visualization panels showing real-time charts, gauges, and heatmaps for all registered devices.' },
+      { iconName: 'CloudUpload',    title: 'Firmware OTA Updates',            description: 'Over-The-Air firmware deployment pipeline with version rollback, batch device targeting, and update scheduling.' },
+      { iconName: 'MapPin',         title: 'Geo-Location Tracking',           description: 'GPS coordinate ingestion, geofencing rule evaluation, and live asset map visualization for mobile or vehicle IoT deployments.' },
+      { iconName: 'Database',       title: 'Time-Series Data Storage',        description: 'Purpose-built InfluxDB time-series backend with automatic data retention policies, aggregation, and long-term archival.' },
+      { iconName: 'Shield',         title: 'Device Authentication',           description: 'X.509 certificate provisioning and mutual TLS for each device, ensuring only authorized hardware can publish data to the platform.' },
+      { iconName: 'Layers',         title: 'Fleet Batch Operations',          description: 'Execute commands, push configurations, or trigger reboots across thousands of devices simultaneously with progress tracking.' },
+      { iconName: 'TrendingUp',     title: 'Anomaly Detection',               description: 'ML-powered outlier detection on streaming telemetry that flags anomalous sensor behavior before equipment failures occur.' },
+    ],
+  },
+
+  {
+    id: 'mobile',
+    title: 'Mobile Development',
+    tagline: 'Backend infrastructure built for iOS & Android',
+    description: 'Mobile-first APIs designed for the latency, battery, and offline constraints of native apps. From push notifications and biometric auth to real-time sync and media pipelines.',
+    iconName: 'Smartphone',
+    gradient: 'from-pink-600 via-purple-600 to-violet-700',
+    glowColor: 'rgba(219,39,119,0.35)',
+    accentHex: '#db2777',
+    badge: '12 Capabilities',
+    stats: [
+      { value: '2', label: 'Platforms (iOS & Android)' },
+      { value: '<100ms', label: 'API Response Time' },
+      { value: 'Offline', label: 'First Architecture' },
+      { value: 'OAuth2', label: 'Secure Auth Layer' },
+    ],
+    techStack: ['REST APIs', 'FCM', 'APNs', 'OAuth2', 'WebSocket', 'React Native', 'Swift SDK', 'Kotlin SDK'],
+    capabilities: [
+      { iconName: 'Zap',            title: 'Mobile-Optimized REST APIs',       description: 'Endpoints designed to minimize payload size and round-trips. Supports field selection, cursor pagination, and ETag-based caching out of the box.' },
+      { iconName: 'Bell',           title: 'Push Notifications (FCM & APNs)', description: 'Unified push notification service that abstracts Firebase Cloud Messaging and Apple Push Notification Service behind a single API call, with delivery receipts.' },
+      { iconName: 'Fingerprint',    title: 'Biometric & OAuth2 Auth',         description: 'Tokenized auth flows optimized for mobile: device fingerprinting, silent token refresh, biometric-unlock support, and social login (Google, Apple).' },
+      { iconName: 'WifiOff',        title: 'Offline-First Data Sync',         description: 'Delta sync APIs that let mobile apps operate fully offline and sync only changed records on reconnection, minimizing data usage.' },
+      { iconName: 'Upload',         title: 'Media Upload with Compression',   description: 'Client-side compression hints and server-side transcoding pipeline for photos and videos. CDN delivery URLs returned immediately after upload.' },
+      { iconName: 'ShoppingBag',    title: 'In-App Purchase Integration',     description: 'Validates Apple App Store and Google Play receipts server-side, manages entitlements, and tracks subscription lifecycle events.' },
+      { iconName: 'Link',           title: 'Deep Link & QR Code Support',     description: 'Dynamic link generation, Universal Link and App Link domain setup, and QR code scan-to-action APIs that work across both platforms.' },
+      { iconName: 'BarChart3',      title: 'Mobile Analytics Events',         description: 'Lightweight SDK integration for tracking user funnels, feature adoption, crash events, and session durations without heavy analytics vendors.' },
+      { iconName: 'MessageCircle',  title: 'In-App Chat SDK',                 description: 'Drop-in WebSocket chat client library (React Native / Kotlin / Swift) that connects to the messaging microservice with zero configuration.' },
+      { iconName: 'MapPin',         title: 'Location Services API',           description: 'Reverse geocoding, proximity search, geofence evaluation, and location history storage â€” all without embedding third-party SDKs.' },
+      { iconName: 'RefreshCw',      title: 'Background Sync & Tasks',         description: 'API support for scheduling periodic background tasks (refresh, prefetch, cleanup) coordinated between server and mobile client.' },
+      { iconName: 'ShieldCheck',    title: 'Certificate Pinning Support',     description: 'Server-side certificate and public-key pinning configuration endpoint, enabling mobile clients to validate TLS certificates against a known set.' },
+    ],
+  },
+
+  {
+    id: 'bi-etl',
+    title: 'Power BI & ETL',
+    tagline: 'From raw data to boardroom-ready insights',
+    description: 'Enterprise data pipelines that extract, transform, and load data from every service into structured warehouses, with direct connectors to Power BI, Tableau, and custom BI dashboards.',
+    iconName: 'BarChart3',
+    gradient: 'from-amber-500 via-orange-600 to-red-600',
+    glowColor: 'rgba(245,158,11,0.35)',
+    accentHex: '#f59e0b',
+    badge: '12 Capabilities',
+    stats: [
+      { value: '10+', label: 'Data Source Connectors' },
+      { value: 'Real-Time', label: 'Streaming Pipelines' },
+      { value: 'Power BI', label: 'Native Connector' },
+      { value: 'GDPR', label: 'Compliant Data Ops' },
+    ],
+    techStack: ['Apache Kafka', 'Apache Spark', 'Power BI REST API', 'PostgreSQL', 'dbt', 'Python', 'Airflow', 'Parquet'],
+    capabilities: [
+      { iconName: 'GitBranch',      title: 'ETL Pipeline Orchestration',      description: 'Visual DAG-based pipeline builder for defining extract, transform, and load workflows with scheduling, retries, and dependency management via Apache Airflow.' },
+      { iconName: 'Database',       title: 'Data Warehouse APIs',              description: 'REST endpoints that expose your analytical data warehouse (OLAP) to consuming systems, with column-level ACLs, partitioned queries, and caching.' },
+      { iconName: 'BarChart3',      title: 'Power BI Direct Connector',       description: 'Push datasets directly into Power BI workspaces via the Power BI REST API. Auto-refresh schedules and row-level security configuration included.' },
+      { iconName: 'Layers',         title: 'Multi-Source Data Fusion',        description: 'Ingestion layer that federates data from relational databases, REST, event streams (Kafka), and file uploads into a unified analytical model.' },
+      { iconName: 'Zap',            title: 'Real-Time Streaming Analytics',   description: 'Kafka-powered streaming pipelines that compute rolling aggregations (revenue, DAU, funnel conversion) in sub-second latency using window functions.' },
+      { iconName: 'TrendingUp',     title: 'KPI Metric Aggregation Engine',   description: 'Pre-built KPI calculators (MRR, churn rate, ARPU, LTV) that query multiple services and expose clean metric endpoints for embedding in any dashboard.' },
+      { iconName: 'FileText',       title: 'Report Generation API',           description: 'Scheduled and on-demand report generation in PDF, Excel, and CSV formats â€” with custom logo branding and auto-email delivery to stakeholders.' },
+      { iconName: 'CheckCircle2',   title: 'Data Quality Validation',         description: 'Schema validation, null/duplicate detection, and referential integrity checks running as a pre-load pass, with bad-record quarantine and alerting.' },
+      { iconName: 'Clock',          title: 'Scheduled Job Execution',         description: 'Cron-style scheduler that triggers pipeline stages, report exports, and data syncs reliably with failure alerting and run-history auditing.' },
+      { iconName: 'RefreshCw',      title: 'Incremental Sync Engine',         description: 'Change-data-capture (CDC) using database transaction logs to sync only new or modified rows into the warehouse â€” no full table scans.' },
+      { iconName: 'Download',       title: 'CSV / Excel Export Endpoints',    description: 'Streaming download endpoints for large datasets that chunk results into segmented files, compatible with Power BI import mode and Excel data connectors.' },
+      { iconName: 'Shield',         title: 'GDPR Data Ops Compliance',        description: 'Data lineage tracking, PII masking/tokenization, automated retention policy enforcement, and audit trails for all pipeline runs.' },
+    ],
+  },
+
+  {
+    id: 'ml-ai',
+    title: 'ML, DL & Artificial Intelligence',
+    tagline: 'Production AI that learns, infers, and improves',
+    description: 'A full-stack AI engineering platform covering LLM integration, computer vision, recommendation systems, NLP pipelines, anomaly detection, and model lifecycle management â€” all production-battle-tested.',
+    iconName: 'BrainCircuit',
+    gradient: 'from-violet-600 via-purple-700 to-rose-600',
+    glowColor: 'rgba(124,58,237,0.35)',
+    accentHex: '#7c3aed',
+    badge: '14 AI Capabilities',
+    stats: [
+      { value: '5+', label: 'LLM Providers' },
+      { value: 'RAG', label: 'Built-in Pipeline' },
+      { value: 'Real-Time', label: 'Inference APIs' },
+      { value: 'ONNX', label: 'Model Format Support' },
+    ],
+    techStack: ['Python', 'FastAPI', 'LangChain', 'HuggingFace', 'PyTorch', 'TensorFlow', 'OpenAI SDK', 'Qdrant / Pinecone', 'Celery', 'ONNX Runtime'],
+    capabilities: [
+      { iconName: 'MessageSquare',  title: 'LLM Integration (GPT, Gemini, Claude)', description: 'A secure, rate-limited proxy that routes requests to any LLM provider. Supports streaming responses, function calling, and provider failover under one unified API.' },
+      { iconName: 'BookOpen',       title: 'RAG Pipeline (Retrieval-Augmented Gen)', description: 'End-to-end RAG system with document ingestion, vector embedding (Qdrant/Pinecone), semantic retrieval, and grounded answer generation â€” no hallucinations.' },
+      { iconName: 'Tag',            title: 'Text Classification & NER',       description: 'Fine-tuned BERT-based models for multi-class text categorization and named entity recognition â€” deployable as a REST endpoint or embedded in pipelines.' },
+      { iconName: 'Star',           title: 'Sentiment Analysis',              description: 'Real-time sentiment scoring (positive / negative / neutral) on reviews, support tickets, and chat messages, with aspect-level granularity.' },
+      { iconName: 'Eye',            title: 'Computer Vision API',             description: 'Image classification, object detection (YOLO), OCR, and face recognition APIs backed by ONNX Runtime for CPU/GPU deployment without vendor lock-in.' },
+      { iconName: 'Sparkles',       title: 'Recommendation Engine',           description: 'Collaborative-filtering and content-based recommendation models that serve personalized product, content, and user suggestions in under 50ms.' },
+      { iconName: 'TrendingUp',     title: 'Time-Series Forecasting',         description: 'LSTM and Prophet-based forecasting models for demand prediction, anomaly detection, and KPI projection â€” retrained automatically on new data.' },
+      { iconName: 'AlertTriangle',  title: 'Anomaly Detection (Unsupervised)','description': 'Isolation Forest and Autoencoder models that identify outliers in metric streams, log events, or transactional data without labeled training data.' },
+      { iconName: 'Shuffle',        title: 'A/B Testing Framework',          description: 'Experiment management layer that splits traffic, collects outcome metrics, runs statistical significance tests, and auto-promotes winning variants.' },
+      { iconName: 'Layers',         title: 'Model Registry & Versioning',    description: 'MLflow-compatible model registry that tracks every trained version, metadata, metrics, and lineage across the full ML lifecycle.' },
+      { iconName: 'Code2',          title: 'NLP Processing Pipeline',        description: 'Pre-built tokenization, POS tagging, coreference resolution, and dependency parsing pipeline using spaCy and HuggingFace Transformers.' },
+      { iconName: 'Unlock',         title: 'Prompt Engineering Framework',   description: 'A prompt management system that versions, tests, and optimizes prompts in production with automatic rollback on quality regression.' },
+      { iconName: 'Search',         title: 'Semantic Search Engine',         description: 'Dense vector search over your documents and products using embedding models, returning semantically relevant results beyond keyword matching.' },
+      { iconName: 'Bot',            title: 'Conversational AI Chatbot',      description: 'End-to-end chatbot framework with intent recognition, slot filling, multi-turn context, and seamless handoff to human agents when confidence drops.' },
+    ],
+  },
+
+  {
+    id: 'devops',
+    title: 'DevOps & Infrastructure',
+    tagline: 'Ship faster, recover instantly, scale infinitely',
+    description: 'A complete DevOps engineering stack that transforms how you build, test, deploy, and monitor software. From containerization and CI/CD automation to zero-downtime releases and real-time observability.',
+    iconName: 'GitBranch',
+    gradient: 'from-sky-500 via-cyan-600 to-teal-600',
+    glowColor: 'rgba(14,165,233,0.35)',
+    accentHex: '#0ea5e9',
+    badge: '12 Capabilities',
+    stats: [
+      { value: 'Zero', label: 'Downtime Deployments' },
+      { value: 'K8s', label: 'Native Orchestration' },
+      { value: '<5min', label: 'Full Pipeline Run' },
+      { value: '99.99%', label: 'Target Availability' },
+    ],
+    techStack: ['Docker', 'Kubernetes', 'Jenkins', 'GitHub Actions', 'Prometheus', 'Grafana', 'ELK Stack', 'Terraform', 'ArgoCD', 'Helm'],
+    capabilities: [
+      { iconName: 'GitBranch',      title: 'CI/CD Pipeline Automation',       description: 'End-to-end GitHub Actions / Jenkins pipelines with build, lint, unit test, integration test, and progressive deployment stages â€” fully parameterized.' },
+      { iconName: 'Box',            title: 'Docker & Kubernetes Deployments', description: 'Container orchestration via Helm charts and ArgoCD with namespace isolation, resource quotas, HPA auto-scaling, and multi-region rollout support.' },
+      { iconName: 'Network',        title: 'API Gateway Management',          description: 'Centralized Spring Cloud Gateway management with dynamic route configuration, circuit breakers (Resilience4j), and canary traffic splitting.' },
+      { iconName: 'Activity',       title: 'Observability & Monitoring',      description: 'Prometheus metrics collection + Grafana dashboards + distributed tracing (Jaeger/Zipkin) giving full request-level visibility across all services.' },
+      { iconName: 'FileText',       title: 'Log Aggregation & Search',        description: 'ELK Stack (Elasticsearch, Logstash, Kibana) integration that centralizes structured logs from every service with real-time full-text search and alerting.' },
+      { iconName: 'Lock',           title: 'Secret & Config Management',      description: 'HashiCorp Vault integration for dynamic secret injection, certificate rotation, and environment-specific configuration without hardcoded credentials.' },
+      { iconName: 'TrendingUp',     title: 'Auto-Scaling Policies',          description: 'Kubernetes HPA and VPA rules that respond to CPU, memory, and custom business metrics, scaling pods up and down automatically under load.' },
+      { iconName: 'RefreshCw',      title: 'Blue/Green & Rolling Releases',  description: 'Zero-downtime deployment strategies (blue/green, canary, rolling) with automated smoke tests and instant rollback triggers on failure.' },
+      { iconName: 'Server',         title: 'Infrastructure as Code (IaC)',   description: 'Terraform modules for provisioning cloud infrastructure (AWS/GCP/Azure) idempotently, with drift detection and cost estimation in CI.' },
+      { iconName: 'Shield',         title: 'Security Scanning & Hardening',  description: 'Static code analysis (SonarQube), container vulnerability scanning (Trivy), dependency audit (OWASP), and network policy enforcement in Kubernetes.' },
+      { iconName: 'Zap',            title: 'Performance Load Testing',       description: 'Automated k6 / Gatling load-test suites that run on every release, assert SLA thresholds, and publish flame graphs to CI dashboards.' },
+      { iconName: 'Database',       title: 'Backup & Disaster Recovery',     description: 'Automated database snapshots, cross-region replication, and tested DR runbooks that guarantee RPO < 1hr and RTO < 30min across all services.' },
+    ],
+  },
+  {
+    id: 'virtual-ar-3d',
+    title: 'XR, 3D Modeling & Animation',
+    tagline: 'Immersive VR/AR and high-fidelity 3D assets',
+    description: 'Cutting-edge 3D solutions including high-fidelity modeling, VR/AR applications, and custom 2D/3D animations designed to captivate and engage users across all platforms.',
+    iconName: 'Box',
+    gradient: 'from-cyan-600 via-blue-500 to-indigo-700',
+    glowColor: 'rgba(6,182,212,0.35)',
+    accentHex: '#06b6d4',
+    badge: '10 Capabilities',
+    stats: [
+      { value: 'Unity/UE5', label: 'Engine Support' },
+      { value: '4K', label: 'Texture Quality' },
+      { value: 'WebXR', label: 'Browser Ready' },
+      { value: '60fps', label: 'Perf Target' },
+    ],
+    techStack: ['Unity', 'Unreal Engine', 'Blender', 'Three.js', 'WebXR', 'Maya', 'After Effects', 'Spline'],
+    capabilities: [
+      { iconName: 'Box',            title: '3D High-Poly Modeling',           description: 'Creation of complex 3D assets with high polygon counts, optimized for cinematic rendering or real-time performance through retopology.' },
+      { iconName: 'Layers',         title: 'Augmented Reality (AR) Ops',      description: 'ARKit and ARCore based applications that overlay digital information onto the physical world with precise plane detection and lighting estimation.' },
+      { iconName: 'Globe',          title: 'Virtual Reality (VR) Hub',        description: 'Fully immersive VR environments for Meta Quest, HTC Vive, and Apple Vision Pro, featuring interactive physics and spatial audio.' },
+      { iconName: 'Video',          title: '2D & 3D Motion Graphics',         description: 'Dynamic character and environment animations, ranging from smooth 2D vector motion to complex 3D skeletal and vertex animations.' },
+      { iconName: 'Zap',            title: 'Real-Time Web 3D (Three.js)',     description: 'Interactive 3D experiences directly in the browser using Three.js and React Three Fiber, optimized for mobile and desktop web.' },
+      { iconName: 'Camera',         title: 'Photogrammetry & Scanning',      description: 'Converting real-world objects and environments into high-quality 3D models using advanced image-based reconstruction techniques.' },
+      { iconName: 'Sparkles',       title: 'Visual Effects (VFX)',            description: 'Particle systems, fluid simulations, and custom shaders that add life and realism to digital scenes and interactive apps.' },
+      { iconName: 'Smartphone',      title: 'Mobile AR Visualization',         description: 'Lightweight AR viewers for product showcasing, allowing users to place and interact with virtual products in their own space.' },
+      { iconName: 'Cpu',            title: 'Metaverse Infrastructure',         description: 'Building persistent, multi-user virtual worlds with scalable backend support for social interaction and digital assets.' },
+      { iconName: 'Music',          title: 'Spatial Audio Integration',       description: 'Implementation of HRTF-based 3D audio that changes dynamically as users move through virtual or augmented spaces.' },
+    ],
+  },
+  {
+    id: 'ui-ux',
+    title: 'UX/UI Design',
+    tagline: 'Designing interfaces that users love to navigate',
+    description: 'Strategic user experience design paired with stunning visual interfaces. We bridge the gap between complex functionality and intuitive, beautiful design systems.',
+    iconName: 'Palette',
+    gradient: 'from-rose-500 via-pink-600 to-purple-700',
+    glowColor: 'rgba(244,63,94,0.35)',
+    accentHex: '#f43f5e',
+    badge: '10 Capabilities',
+    stats: [
+      { value: 'Figma', label: 'Primary Tool' },
+      { value: 'Atomic', label: 'Design System' },
+      { value: 'WCAG', label: 'Accessibility' },
+      { value: 'Hi-Fi', label: 'Prototyping' },
+    ],
+    techStack: ['Figma', 'Adobe XD', 'Sketch', 'Framer', 'Principle', 'Maze', 'Lottie', 'Storybook'],
+    capabilities: [
+      { iconName: 'Search',         title: 'User Research & Synthesis',       description: 'Deep-dive user interviews, persona creation, and empathy mapping to understand core user needs before a single pixel is drawn.' },
+      { iconName: 'Layout',         title: 'Wireframing & Information Arch',  description: 'Structural blueprints of your application focusing on hierarchy, flow, and usability without being distracted by visual styling.' },
+      { iconName: 'Palette',        title: 'High-Fidelity UI Design',         description: 'Pixel-perfect visual designs that incorporate brand identity, modern typography, and curated color palettes into a cohesive aesthetic.' },
+      { iconName: 'Zap',            title: 'Interactive Prototyping',         description: 'Clickable, high-fidelity prototypes that simulate real application behavior for stakeholder reviews and user testing.' },
+      { iconName: 'Layers',         title: 'Scalable Design Systems',         description: 'Creating "Atomic Design" based component libraries that ensure consistency across large-scale platforms and speed up development.' },
+      { iconName: 'Activity',       title: 'Usability Testing & Audit',       description: 'Running moderated and unmoderated user tests to identify points of friction and auditing existing apps for UX improvements.' },
+      { iconName: 'Smartphone',      title: 'Responsive & Mobile-First',       description: 'Designing fluid experiences that transition seamlessly from desktop ultrawides to mobile screens with touch-first interactions.' },
+      { iconName: 'Accessibility',  title: 'WCAG Accessibility Design',       description: 'Ensuring your digital products are inclusive and usable by everyone by following strict accessibility standards (WCAG 2.1).' },
+      { iconName: 'MousePointer2',  title: 'Micro-Interactions',              description: 'Adding subtle, delightful animations and feedback loops that make the interface feel alive and responsive to user input.' },
+      { iconName: 'Repeat',         title: 'Iterative Design Cycles',         description: 'A constant loop of feedback, measurement, and refinement based on real-world data and user heatmaps.' },
+    ],
+  },
+];
+
+// â”€â”€â”€ Helper â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+export const getDomainById = (id: string) => domains.find(d => d.id === id);
+export const getServiceById = (id: string) => webDevServices.find(s => s.id === id);
+
+
+============================================================
+FILE: E:\Platform_dev_tool_Onboarding\showcasing\src\emailConfig.ts
+============================================================
+// â”€â”€â”€ Production Backend for Email Relay â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// This URL points to your now-live Render backend:
+// https://showcase-f885.onrender.com
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+export const EMAIL_CONFIG = {
+  // Relative path (preferred for Vercel) or fallback for development
+  API_URL: import.meta.env.VITE_API_URL || '',
+
+  // Recipient (main business contact)
+  TO_EMAIL: 'marketbusinessofall@gmail.com',
+};
+
+
+============================================================
+FILE: E:\Platform_dev_tool_Onboarding\showcasing\src\showcaseData.ts
+============================================================
+import dashboardImg from './assets/showcase/dashboard.png';
+import ecommerceImg from './assets/showcase/ecommerce.png';
+import iotImg from './assets/showcase/iot.png';
+
+// â”€â”€ Showcase Items â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// Add your images to src/assets/showcase/ then import and add them below.
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+export interface ShowcaseItem {
+  domainId?: string; // Optional: bind to a specific domain
+  title: string;
+  description: string;
+  image: string;
+  tag?: string;
+}
+
+export const globalShowcaseItems: ShowcaseItem[] = [
+  {
+    title: "Scalable Architecture",
+    description: "Built for million-user scale with distributed caching, service discovery, and automated horizontal scaling.",
+    image: dashboardImg,
+    tag: "Performance"
+  },
+];
+
+export const domainShowcaseItems: Record<string, ShowcaseItem[]> = {
+  'web-dev': [
+    {
+      title: "Authentication & Identity",
+      description: "Secure JWT-based authentication system with RBAC, social login, and MFA capabilities.",
+      image: dashboardImg,
+      tag: "Security"
+    },
+    {
+      title: "Billing & Subscription",
+      description: "Full Stripe integration for managing plan tiers, metered billing, and automated invoicing.",
+      image: ecommerceImg,
+      tag: "Fintech"
+    },
+    {
+      title: "Smart Search Engine",
+      description: "Elasticsearch-powered full-text search with fuzzy matching and real-time indexing.",
+      image: dashboardImg,
+      tag: "Discovery"
+    },
+    {
+      title: "File Storage & CDN",
+      description: "Scalable object storage integration with local/S3 support and automated image optimization.",
+      image: dashboardImg,
+      tag: "Infrastructure"
+    }
+  ],
+  'iot': [
+    {
+      title: "Device Fleet Management",
+      description: "Centralized control for millions of connected devices with real-time health monitoring.",
+      image: iotImg,
+      tag: "Control"
+    },
+    {
+      title: "Protocol Gateway",
+      description: "Multi-protocol ingestion handling MQTT, HTTP, and CoAP with sub-10ms latency.",
+      image: iotImg,
+      tag: "Connectivity"
+    },
+    {
+      title: "Digital Twin Ops",
+      description: "Synchronized virtual replicas of physical hardware for testing and predictive modeling.",
+      image: iotImg,
+      tag: "Simulation"
+    }
+  ],
+  'mobile': [
+    {
+      title: "Offline Sync Engine",
+      description: "Delta-sync logic that keeps mobile apps functional in zero-connectivity environments.",
+      image: ecommerceImg,
+      tag: "Native"
+    },
+    {
+      title: "Push Notification Hub",
+      description: "Unified FCM/APNs gateway for transactional and marketing notifications.",
+      image: ecommerceImg,
+      tag: "Engagement"
+    }
+  ],
+  'bi-etl': [
+    {
+      title: "Data Orchestration",
+      description: "Airflow-based DAGs for managing complex ETL workflows across siloed data sources.",
+      image: dashboardImg,
+      tag: "Pipelines"
+    },
+    {
+      title: "Power BI Connectors",
+      description: "Direct-push datasets that keep your executive dashboards updated in real-time.",
+      image: dashboardImg,
+      tag: "Insights"
+    }
+  ],
+  'ml-ai': [
+    {
+      title: "RAG Knowledge Base",
+      description: "Retrieval-Augmented Generation pipeline using vector databases for grounded AI answers.",
+      image: dashboardImg,
+      tag: "GenAI"
+    },
+    {
+      title: "Recommendation Engine",
+      description: "Collaborative filtering models serving personalized content in under 50ms.",
+      image: dashboardImg,
+      tag: "ML Ops"
+    }
+  ],
+  'devops': [
+    {
+      title: "Kubernetes Orchestration",
+      description: "Automated scaling and self-healing for distributed containerized workloads.",
+      image: dashboardImg,
+      tag: "Platform"
+    },
+    {
+      title: "CI/CD Automation",
+      description: "Zero-downtime deployment pipelines with integrated security scanning.",
+      image: dashboardImg,
+      tag: "Automation"
+    }
+  ],
+  'virtual-ar-3d': [
+    {
+      title: "XR Interactive Scene",
+      description: "Immersive VR/AR environments for industrial training and product visualization.",
+      image: iotImg,
+      tag: "XR"
+    },
+    {
+      title: "WebXR Discovery",
+      description: "High-performance 3D visualization running directly in modern web browsers.",
+      image: iotImg,
+      tag: "Web 3D"
+    }
+  ],
+  'ui-ux': [
+    {
+      title: "Atomic Design System",
+      description: "Standardized component library built for scale and interface consistency.",
+      image: dashboardImg,
+      tag: "Design"
+    },
+    {
+      title: "Interactive Prototypes",
+      description: "Clickable high-fidelity mocks used for user testing and stakeholder alignment.",
+      image: dashboardImg,
+      tag: "UX"
+    }
+  ],
+  // Add more domain-specific items here...
+};
+
+/**
+ * Returns the showcase items for a specific domain, merging global items.
+ */
+export function getShowcaseItems(domainId: string): ShowcaseItem[] {
+  const specificItems = domainShowcaseItems[domainId] || [];
+  
+  // Custom logic: if no specific items, show a general one
+  if (specificItems.length === 0) {
+    return [
+      {
+        title: "Platform Dashboard",
+        description: "High-fidelity management interface for enterprise-grade microservices.",
+        image: dashboardImg,
+        tag: "Interface"
+      },
+      ...globalShowcaseItems
+    ];
+  }
+
+  return [...specificItems, ...globalShowcaseItems];
+}
+
+
+============================================================
+FILE: E:\Platform_dev_tool_Onboarding\showcasing\src\pages\HomePage.tsx
+============================================================
+import { useNavigate } from 'react-router-dom';
+import { domains } from '../data';
+import type { Domain } from '../data';
+import Icon from '../components/Icon';
+import ContactForm from '../components/ContactForm';
+import Carousel from '../components/Carousel';
+import { globalShowcaseItems } from '../showcaseData';
+
+import {
+  Layers, ArrowRight, Shield, Zap, Globe2, CheckCircle2,
+  Users, Star, ChevronDown
+} from 'lucide-react';
+
+export default function HomePage() {
+  const navigate = useNavigate();
+
+  return (
+    <div className="w-full page-fade-in">
+
+      {/* â”€â”€ Hero â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      <section className="relative pt-44 pb-32 overflow-hidden">
+        {/* Orbs */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden -z-10">
+          <div className="absolute top-[-5%] left-[-10%] w-[60%] h-[60%] bg-indigo-600/12 blur-[140px] rounded-full" />
+          <div className="absolute bottom-[0%] right-[-5%] w-[40%] h-[40%] bg-purple-700/10 blur-[120px] rounded-full" />
+          <div className="absolute top-[30%] left-[50%] w-[30%] h-[30%] bg-blue-600/8 blur-[100px] rounded-full" />
+        </div>
+
+        <div className="max-w-6xl mx-auto px-6 text-center relative z-10">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-400/25 text-indigo-300 text-sm font-semibold mb-10 backdrop-blur-md">
+            <Layers className="w-4 h-4" />
+            Enterprise Technology Solutions Â· Tunisia
+          </div>
+
+          {/* Headline */}
+          <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-black tracking-tight mb-8 leading-[0.95]">
+            <span className="premium-gradient-text">The Platform</span>
+            <br />
+            <span className="text-white">Behind Your Innovation.</span>
+          </h1>
+
+          <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed mb-12">
+            Production-ready microservices, AI inference pipelines, IoT infrastructure, DevOps tooling, and advanced analytics.
+            <br className="hidden md:block" />
+            License <strong className="text-white">exactly</strong> what your business needs â€” nothing more.
+          </p>
+
+          {/* CTAs */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button
+              onClick={() => document.getElementById('domains')?.scrollIntoView({ behavior: 'smooth' })}
+              className="glow-button px-9 py-4 text-base font-black"
+            >
+              Explore Domains
+              <ArrowRight className="w-5 h-5" />
+            </button>
+            <button
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              className="px-9 py-4 rounded-2xl border-2 border-gray-700 text-gray-300 font-bold hover:border-gray-500 hover:text-white transition-all duration-300 text-base"
+            >
+              Request a Briefing
+            </button>
+          </div>
+
+          {/* Scroll hint */}
+          <div className="mt-16 flex justify-center">
+            <button
+              onClick={() => document.getElementById('domains')?.scrollIntoView({ behavior: 'smooth' })}
+              className="text-gray-600 hover:text-gray-400 transition-colors animate-bounce"
+            >
+              <ChevronDown className="w-6 h-6" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* â”€â”€ Stats Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      <section className="border-t border-b border-white/5 py-10 bg-black/20 backdrop-blur-sm">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            {[
+              { value: '8',    label: 'Expert Domains' },
+              { value: '25+',  label: 'Microservices' },
+              { value: '100+', label: 'Capabilities' },
+              { value: '100%', label: 'Source-Code Available' },
+            ].map(stat => (
+              <div key={stat.label}>
+                <div className="text-3xl md:text-4xl font-black premium-gradient-text mb-1">{stat.value}</div>
+                <div className="text-sm text-gray-500 font-medium">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* â”€â”€ Domain Cards â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      <section id="domains" className="py-24">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <p className="text-sm font-bold uppercase tracking-[0.25em] text-indigo-400 mb-4">Our Expertise</p>
+            <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-5">
+              Choose Your Domain
+            </h2>
+            <p className="text-gray-400 text-lg max-w-xl mx-auto">
+              Six specialized technology domains, each unlocking a complete, battle-tested engineering capability.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {domains.map((domain, idx) => (
+              <DomainCard
+                key={domain.id}
+                domain={domain}
+                index={idx}
+                onClick={() => navigate(`/domain/${domain.id}`)}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* â”€â”€ Implementation Showcase â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      <section className="py-24 border-t border-white/5 bg-slate-950/20">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div>
+              <p className="text-sm font-bold uppercase tracking-[0.25em] text-indigo-400 mb-4">Real-World Execution</p>
+              <h2 className="text-4xl md:text-5xl font-black tracking-tight">
+                Work Showcase
+              </h2>
+            </div>
+            <p className="text-gray-400 text-lg max-w-md">
+              A glimpse into production-grade implementations across our core technology domains.
+            </p>
+          </div>
+
+          <Carousel 
+            items={globalShowcaseItems}
+          />
+        </div>
+      </section>
+
+      {/* â”€â”€ Why section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      <section className="py-24 border-t border-white/5">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-14">
+            <h2 className="text-4xl font-black mb-4">Why License With Us?</h2>
+            <p className="text-gray-400 max-w-lg mx-auto">
+              Every service is built to production standards. No prototypes. No shortcuts.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                icon: <Zap className="w-6 h-6" />,
+                title: 'Zero Vendor Lock-In',
+                desc: 'Open architecture. Deploy on any cloud, any container, any infrastructure you control. No recurring SaaS fees.',
+              },
+              {
+                icon: <Shield className="w-6 h-6" />,
+                title: 'Enterprise Security',
+                desc: 'JWT, RBAC, mutual TLS, secret management, and GDPR-compliant data handling built in from day one â€” not bolted on later.',
+              },
+              {
+                icon: <Globe2 className="w-6 h-6" />,
+                title: 'Full Source Access',
+                desc: 'Enterprise license tier includes complete Java / Python source code with unlimited internal modification rights. What you buy, you own.',
+              },
+            ].map(item => (
+              <div key={item.title} className="glass-card rounded-3xl p-8 flex flex-col gap-5">
+                <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
+                  {item.icon}
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
+                  <p className="text-gray-400 leading-relaxed text-sm">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Feature checklist */}
+          <div className="mt-10 glass-card rounded-3xl p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {[
+              'Spring Boot + React stack', 'Docker-ready containers', 'Horizontal scaling',
+              'REST + WebSocket APIs', 'MongoDB + PostgreSQL', 'Full test coverage',
+              'API Gateway included', 'Stripe payment integration', 'Complete documentation',
+            ].map(feat => (
+              <div key={feat} className="flex items-center gap-3">
+                <CheckCircle2 className="w-5 h-5 text-emerald-400 flex-shrink-0" />
+                <span className="text-gray-300 text-sm font-medium">{feat}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* â”€â”€ Trusted / Social Proof â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      <section className="py-16 border-t border-white/5 bg-black/20">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <div className="flex items-center justify-center gap-2 mb-8">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
+            ))}
+          </div>
+          <blockquote className="text-xl md:text-2xl text-gray-300 font-medium leading-relaxed italic mb-6">
+            "The microservice stack cut our time-to-market by 60%. We licensed the auth + ecommerce combo
+            and had a production storefront running in under two weeks."
+          </blockquote>
+          <div className="flex items-center justify-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center">
+              <Users className="w-5 h-5 text-indigo-400" />
+            </div>
+            <div className="text-left">
+              <div className="font-bold text-white text-sm">Enterprise Client</div>
+              <div className="text-gray-500 text-xs">SaaS Platform Â· Tunis</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* â”€â”€ Contact â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      <section id="contact" className="py-24 border-t border-white/5">
+        <div className="max-w-2xl mx-auto px-6">
+          <div className="text-center mb-10">
+            <p className="text-sm font-bold uppercase tracking-[0.25em] text-indigo-400 mb-4">Get In Touch</p>
+            <h2 className="text-4xl font-black mb-4">Ready to deploy?</h2>
+            <p className="text-gray-400">
+              Tell us your requirements. We'll match you with the right modules and prepare a technical briefing.
+            </p>
+          </div>
+          <div className="glass-card rounded-3xl p-8 md:p-10">
+            <ContactForm />
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+// â”€â”€ Domain Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function DomainCard({ domain, index, onClick }: { domain: Domain; index: number; onClick: () => void }) {
+  const colors: string[] = [
+    'from-indigo-600 to-blue-600',
+    'from-emerald-500 to-teal-600',
+    'from-pink-600 to-violet-700',
+    'from-amber-500 to-orange-600',
+    'from-violet-600 to-rose-600',
+    'from-sky-500 to-cyan-600',
+  ];
+
+  return (
+    <button
+      onClick={onClick}
+      className="group text-left rounded-[28px] transition-all duration-500 hover:-translate-y-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
+      style={{
+        animationDelay: `${index * 80}ms`,
+        transform: 'translateY(0)',
+      }}
+    >
+      <div
+        className="relative h-full rounded-[28px] bg-gray-900/70 backdrop-blur-xl flex flex-col overflow-hidden"
+        style={{ border: `1px solid ${domain.accentHex}30` }}
+      >
+        {/* Color bar */}
+        <div className={`h-1 w-full bg-gradient-to-r ${colors[index % colors.length]}`} />
+
+        {/* Hover glow */}
+        <div
+          className="absolute top-0 right-0 w-56 h-56 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-3xl rounded-full pointer-events-none"
+          style={{ background: domain.glowColor, top: '-30px', right: '-30px' }}
+        />
+
+        <div className="p-8 flex flex-col gap-6 relative z-10 flex-grow">
+          {/* Icon */}
+          <div
+            className="w-14 h-14 rounded-2xl flex items-center justify-center transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3"
+            style={{ background: `${domain.accentHex}18`, border: `1px solid ${domain.accentHex}35` }}
+          >
+            <Icon name={domain.iconName} size={26} color={domain.accentHex} />
+          </div>
+
+          {/* Text */}
+          <div className="flex-grow">
+            <h3 className="text-2xl font-black text-white mb-3 leading-tight">{domain.title}</h3>
+            <p className="text-gray-400 text-sm leading-relaxed line-clamp-3">{domain.tagline}</p>
+          </div>
+
+          {/* Footer */}
+          <div className="flex items-center justify-between pt-2 border-t border-white/5">
+            <span
+              className="text-xs font-bold px-3 py-1.5 rounded-full"
+              style={{ background: `${domain.accentHex}18`, color: domain.accentHex, border: `1px solid ${domain.accentHex}30` }}
+            >
+              {domain.badge}
+            </span>
+            <span
+              className="text-sm font-bold flex items-center gap-1 group-hover:gap-2.5 transition-all duration-300"
+              style={{ color: domain.accentHex }}
+            >
+              Explore <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </span>
+          </div>
+        </div>
+      </div>
+    </button>
+  );
+}
+
+
+============================================================
+FILE: E:\Platform_dev_tool_Onboarding\showcasing\src\pages\ServiceDetails.tsx
+============================================================
+import { useState } from 'react';
+import { useParams, useNavigate, Link } from 'react-router-dom';
+import { getServiceById, getDomainById } from '../data';
+import Icon from '../components/Icon';
+import ContactForm from '../components/ContactForm';
+import Carousel from '../components/Carousel';
+import { ChevronLeft, ChevronRight, CheckCircle2, Home } from 'lucide-react';
+
+import dashboardImg from '../assets/showcase/dashboard.png';
+import ecommerceImg from '../assets/showcase/ecommerce.png';
+import iotImg from '../assets/showcase/iot.png';
+
+const WEB_DEV_ACCENT = '#6366f1';
+
+const tiers = [
+  {
+    name: 'Standard Server License',
+    multiplier: 1,
+    desc: 'Compiled JAR binary + Docker image, suitable for standard production deployments.',
+    included: ['Production JAR / Docker image', 'Deployment documentation', 'API reference guide', 'Environment config guide', '30-day integration support'],
+  },
+  {
+    name: 'Enterprise Source Code',
+    multiplier: 3.5,
+    desc: 'Full Java/Python source code with unlimited internal modification and redistribution rights.',
+    included: ['Everything in Standard', 'Complete source code', 'Unlimited modification rights', 'Architecture diagrams', 'Priority 90-day support'],
+  },
+];
+
+export default function ServiceDetails() {
+  const { serviceId } = useParams<{ serviceId: string }>();
+  const navigate = useNavigate();
+  const service = getServiceById(serviceId ?? '');
+  const domain = getDomainById('web-dev');
+
+  const [selectedTier, setSelectedTier] = useState(0);
+
+  if (!service || !domain) {
+    return (
+      <div className="min-h-[60vh] flex flex-col items-center justify-center gap-6 text-center px-6">
+        <div className="text-8xl font-black text-gray-800">404</div>
+        <h2 className="text-2xl font-bold text-white">Service Not Found</h2>
+        <p className="text-gray-400">That microservice doesn't exist in the catalog.</p>
+        <button onClick={() => navigate('/domain/web-dev')} className="glow-button px-6 py-3 text-sm">
+          Back to Web Dev
+        </button>
+      </div>
+    );
+  }
+
+  const price = Math.round(service.basePrice * tiers[selectedTier].multiplier);
+
+  return (
+    <div className="w-full page-fade-in">
+
+      {/* â”€â”€ Hero â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      <section
+        className="relative pt-36 pb-16 overflow-hidden"
+        style={{ background: `radial-gradient(ellipse at 70% 0%, ${WEB_DEV_ACCENT}15 0%, transparent 60%)` }}
+      >
+        <div className={`absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r ${domain.gradient}`} />
+
+        {/* Orb */}
+        <div
+          className="absolute top-[-10%] right-[-5%] w-[45%] h-[55%] blur-[140px] rounded-full opacity-20 pointer-events-none"
+          style={{ background: WEB_DEV_ACCENT }}
+        />
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          {/* Breadcrumb */}
+          <nav className="flex items-center gap-2 text-sm text-gray-500 mb-12 flex-wrap">
+            <Link to="/" className="hover:text-gray-300 transition-colors flex items-center gap-1">
+              <Home className="w-3.5 h-3.5" /> Home
+            </Link>
+            <ChevronRight className="w-4 h-4 text-gray-700" />
+            <Link to="/domain/web-dev" className="hover:text-gray-300 transition-colors">Web Development</Link>
+            <ChevronRight className="w-4 h-4 text-gray-700" />
+            <span style={{ color: WEB_DEV_ACCENT }} className="font-medium">{service.title}</span>
+          </nav>
+
+          {/* Heading */}
+          <div className="flex items-start gap-5 mb-6">
+            <div
+              className="w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0"
+              style={{ background: `${WEB_DEV_ACCENT}18`, border: `1px solid ${WEB_DEV_ACCENT}40` }}
+            >
+              <Icon name={service.iconName} size={28} color={WEB_DEV_ACCENT} />
+            </div>
+            <div>
+              <h1 className="text-4xl md:text-6xl font-black tracking-tight leading-none mb-3">
+                <span style={{
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundImage: `linear-gradient(135deg, #fff 50%, ${WEB_DEV_ACCENT})`,
+                  backgroundClip: 'text',
+                }}>
+                  {service.title}
+                </span>
+              </h1>
+              <p className="text-gray-400 text-lg max-w-2xl">{service.shortDesc}</p>
+            </div>
+          </div>
+
+          {/* Tech tags */}
+          <div className="flex flex-wrap gap-2 mt-6">
+            {service.techStack.map(t => (
+              <span key={t} className="text-xs font-bold px-3 py-1.5 rounded-lg bg-gray-800 text-gray-300 border border-gray-700">
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* â”€â”€ Implementation Preview â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      <section className="py-12 border-b border-white/5">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="mb-10">
+            <h2 className="text-2xl font-black text-white mb-2">Implementation Preview</h2>
+            <p className="text-gray-400">Visualizing the service in a production environment.</p>
+          </div>
+          
+          <Carousel 
+            items={[
+              {
+                title: `${service.title} UI`,
+                description: `A production implementation of the ${service.title} module, featuring a responsive interface and real-time data integration.`,
+                image: (service.id === 'ecommerce' || service.id === 'payments') ? ecommerceImg : (service.id === 'iot-hub-ui') ? iotImg : dashboardImg,
+                tag: "Showcase"
+              },
+              {
+                title: "Dark Mode Optimization",
+                description: "All services are built with a premium dark-mode-first aesthetic, ensuring high contrast and optimal user experience.",
+                image: dashboardImg,
+                tag: "Aesthetics"
+              }
+            ]}
+            accentColor={WEB_DEV_ACCENT}
+          />
+        </div>
+      </section>
+
+      {/* â”€â”€ Body: 2 columns â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-start">
+
+          {/* Left: Description + Features */}
+          <div className="lg:col-span-3 space-y-10">
+            {/* Full description */}
+            <div>
+              <h2 className="text-2xl font-black text-white mb-4">About This Service</h2>
+              <p className="text-gray-300 leading-relaxed text-lg">{service.fullDesc}</p>
+            </div>
+
+            {/* Features */}
+            <div>
+              <h3 className="text-xl font-black text-white mb-5">Included Features</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {service.features.map((feat, idx) => (
+                  <div
+                    key={idx}
+                    className="flex items-start gap-3 p-4 rounded-xl transition-all hover:bg-gray-800/40"
+                    style={{ border: '1px solid rgba(255,255,255,0.05)', background: 'rgba(255,255,255,0.02)' }}
+                  >
+                    <CheckCircle2 className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: WEB_DEV_ACCENT }} />
+                    <span className="text-gray-300 text-sm leading-snug font-medium">{feat}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* What's included in license */}
+            <div className="glass-card rounded-2xl p-7">
+              <h3 className="text-xl font-black text-white mb-5">
+                What's Included: {tiers[selectedTier].name}
+              </h3>
+              <div className="flex flex-col gap-3">
+                {tiers[selectedTier].included.map(item => (
+                  <div key={item} className="flex items-center gap-3">
+                    <CheckCircle2 className="w-4 h-4 flex-shrink-0" style={{ color: WEB_DEV_ACCENT }} />
+                    <span className="text-gray-300 text-sm">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Back link */}
+            <button
+              onClick={() => navigate('/domain/web-dev')}
+              className="flex items-center gap-2 text-gray-500 hover:text-gray-300 transition-all hover:gap-3 font-medium text-sm"
+            >
+              <ChevronLeft className="w-4 h-4" /> Back to all Web Dev services
+            </button>
+          </div>
+
+          {/* Right: Pricing + Contact */}
+          <div className="lg:col-span-2 lg:sticky lg:top-28 space-y-6">
+
+            {/* Pricing Card */}
+            <div
+              className="rounded-3xl overflow-hidden"
+              style={{ border: `1px solid ${WEB_DEV_ACCENT}30`, background: 'rgba(10,10,22,0.8)', backdropFilter: 'blur(20px)' }}
+            >
+              <div className={`px-8 pt-7 pb-5 bg-gradient-to-br ${domain.gradient} bg-opacity-10`}>
+                <h2 className="text-xl font-black text-white mb-1">License Configuration</h2>
+                <p className="text-gray-400 text-sm">Select the license tier that fits your needs.</p>
+              </div>
+
+              <div className="px-6 py-5 space-y-4">
+                {tiers.map((tier, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setSelectedTier(idx)}
+                    className={`w-full text-left p-5 rounded-2xl border-2 transition-all duration-300 ${
+                      selectedTier === idx
+                        ? 'bg-indigo-500/10 border-indigo-500 ring-2 ring-indigo-500/20'
+                        : 'bg-black/20 border-gray-800 hover:border-gray-600'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between mb-1.5">
+                      <span className="font-bold text-gray-100">{tier.name}</span>
+                      <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${selectedTier === idx ? 'border-indigo-400' : 'border-gray-600'}`}>
+                        {selectedTier === idx && <div className="w-2.5 h-2.5 rounded-full bg-indigo-400" />}
+                      </div>
+                    </div>
+                    <p className="text-xs text-gray-400 leading-relaxed">{tier.desc}</p>
+                  </button>
+                ))}
+              </div>
+
+              {/* Price */}
+              <div className="mx-6 mb-6 p-5 bg-black/30 rounded-2xl border border-gray-800/50">
+                <span className="text-xs font-bold uppercase tracking-wider text-gray-500 block mb-2">License Investment</span>
+                <div className="flex items-baseline gap-2">
+                  <span
+                    className="text-5xl font-black"
+                    style={{
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundImage: `linear-gradient(135deg, #fff, ${WEB_DEV_ACCENT})`,
+                      backgroundClip: 'text',
+                    }}
+                  >
+                    {price.toLocaleString()}
+                  </span>
+                  <span className="text-xl font-bold text-gray-400">TND</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Contact Card */}
+            <div
+              className="rounded-3xl p-7"
+              style={{ border: `1px solid ${WEB_DEV_ACCENT}25`, background: 'rgba(10,10,22,0.7)', backdropFilter: 'blur(20px)' }}
+            >
+              <h3 className="text-lg font-black text-white mb-1">Inquire About This Module</h3>
+              <p className="text-gray-500 text-sm mb-6">
+                Tell us your use case and we'll prepare a deployment proposal.
+              </p>
+              <ContactForm
+                serviceTitle={`${service.title} (${tiers[selectedTier].name} â€” ${price.toLocaleString()} TND)`}
+                accentHex={WEB_DEV_ACCENT}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+
+============================================================
+FILE: E:\Platform_dev_tool_Onboarding\showcasing\src\pages\DomainPage.tsx
+============================================================
+import { useParams, useNavigate, Link } from 'react-router-dom';
+import { getDomainById, webDevServices } from '../data';
+import Icon from '../components/Icon';
+import ContactForm from '../components/ContactForm';
+import Carousel from '../components/Carousel';
+import { getShowcaseItems } from '../showcaseData';
+import { ChevronRight, ArrowRight, CheckCircle2, Home } from 'lucide-react';
+
+export default function DomainPage() {
+  const { domainId } = useParams<{ domainId: string }>();
+  const navigate = useNavigate();
+  const domain = getDomainById(domainId ?? '');
+
+  if (!domain) {
+    return (
+      <div className="min-h-[60vh] flex flex-col items-center justify-center gap-6 text-center px-6">
+        <div className="text-8xl font-black text-gray-800">404</div>
+        <h2 className="text-2xl font-bold text-white">Domain Not Found</h2>
+        <p className="text-gray-400">The technology domain you're looking for doesn't exist.</p>
+        <button onClick={() => navigate('/')} className="glow-button px-6 py-3 text-sm">
+          <Home className="w-4 h-4" /> Back to Home
+        </button>
+      </div>
+    );
+  }
+
+  const isWebDev = domain.id === 'web-dev';
+  const services = isWebDev ? webDevServices : [];
+  const capabilities = !isWebDev ? (domain.capabilities ?? []) : [];
+  const carouselItems = getShowcaseItems(domain.id);
+
+  return (
+    <div className="w-full page-fade-in">
+
+      {/* â”€â”€ Gradient Hero â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      <section
+        className="relative pt-36 pb-20 overflow-hidden"
+        style={{ background: `radial-gradient(ellipse at 60% 0%, ${domain.accentHex}18 0%, transparent 65%)` }}
+      >
+        {/* Top gradient bar */}
+        <div className={`absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r ${domain.gradient}`} />
+
+        {/* Orbs */}
+        <div className="absolute inset-0 pointer-events-none -z-10">
+          <div
+            className="absolute top-[-10%] right-[-5%] w-[50%] h-[60%] blur-[140px] rounded-full opacity-30"
+            style={{ background: domain.accentHex }}
+          />
+          <div
+            className="absolute bottom-[-5%] left-[-5%] w-[30%] h-[40%] blur-[120px] rounded-full opacity-20"
+            style={{ background: domain.accentHex }}
+          />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+
+          {/* Breadcrumb */}
+          <nav className="flex items-center gap-2 text-sm text-gray-500 mb-12 flex-wrap">
+            <Link to="/" className="hover:text-gray-300 transition-colors flex items-center gap-1">
+              <Home className="w-3.5 h-3.5" /> Home
+            </Link>
+            <ChevronRight className="w-4 h-4 text-gray-700" />
+            <span className="font-medium" style={{ color: domain.accentHex }}>{domain.title}</span>
+          </nav>
+
+          <div className="flex flex-col lg:flex-row lg:items-end gap-12">
+            {/* Left: Title */}
+            <div className="flex-1">
+              <div
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold mb-6 backdrop-blur-md"
+                style={{ background: `${domain.accentHex}18`, color: domain.accentHex, border: `1px solid ${domain.accentHex}40` }}
+              >
+                <Icon name={domain.iconName} size={16} color={domain.accentHex} />
+                {domain.badge}
+              </div>
+
+              <h1 className="text-5xl md:text-7xl font-black tracking-tight leading-none mb-6">
+                <span style={{
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundImage: `linear-gradient(135deg, #fff 40%, ${domain.accentHex})`,
+                  backgroundClip: 'text',
+                }}>
+                  {domain.title}
+                </span>
+              </h1>
+
+              <p className="text-lg text-gray-400 max-w-2xl leading-relaxed">{domain.description}</p>
+            </div>
+
+            {/* Right: CTA */}
+            <div className="lg:w-60 lg:text-right">
+              <button
+                onClick={() => document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' })}
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl font-bold text-white text-sm transition-all hover:brightness-110 active:scale-95"
+                style={{
+                  background: `linear-gradient(135deg, ${domain.accentHex}, ${domain.accentHex}99)`,
+                  boxShadow: `0 0 30px -8px ${domain.accentHex}`,
+                }}
+              >
+                Get a License <ArrowRight className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+
+          {/* Stats Bar */}
+          <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-6">
+            {domain.stats.map(stat => (
+              <div
+                key={stat.label}
+                className="rounded-2xl px-5 py-4 backdrop-blur-sm"
+                style={{ background: `${domain.accentHex}10`, border: `1px solid ${domain.accentHex}25` }}
+              >
+                <div className="text-2xl font-black mb-1" style={{ color: domain.accentHex }}>{stat.value}</div>
+                <div className="text-gray-400 text-xs font-medium">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* â”€â”€ Expertise Showcase â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      <section className="py-16 border-b border-white/5 bg-black/10">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row items-end justify-between gap-6 mb-12">
+            <div>
+              <p className="text-sm font-bold uppercase tracking-[0.25em] text-gray-500 mb-4" style={{ color: `${domain.accentHex}aa` }}>Field Evidence</p>
+              <h2 className="text-4xl font-black text-white">Expertise Showcase</h2>
+            </div>
+            <p className="text-gray-400 text-sm max-w-xs md:text-right">
+              Explore actual implementations and high-fidelity prototypes developed within the {domain.title} domain.
+            </p>
+          </div>
+
+          <Carousel 
+            items={carouselItems}
+            accentColor={domain.accentHex}
+          />
+        </div>
+      </section>
+
+      {/* â”€â”€ Main Content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-6">
+
+          {/* Section header */}
+          <div className="mb-12">
+            <h2 className="text-3xl md:text-4xl font-black text-white mb-3">
+              {isWebDev ? 'Available Microservices' : 'Core Capabilities'}
+            </h2>
+            <p className="text-gray-400">
+              {isWebDev
+                ? 'All 15 modules are independently deployable. License individually or combine them.'
+                : 'Everything included in the domain license. Built for production from day one.'}
+            </p>
+          </div>
+
+          {/* Web Dev â†’ Service Cards */}
+          {isWebDev && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {services.map(svc => (
+                <button
+                  key={svc.id}
+                  onClick={() => navigate(`/service/${svc.id}`)}
+                  className="group glass-card rounded-2xl p-6 text-left flex flex-col gap-4 transition-all duration-300 hover:-translate-y-1"
+                >
+                  <div
+                    className="w-11 h-11 rounded-xl flex items-center justify-center transition-transform group-hover:scale-110"
+                    style={{ background: `${domain.accentHex}18`, border: `1px solid ${domain.accentHex}35` }}
+                  >
+                    <Icon name={svc.iconName} size={20} color={domain.accentHex} />
+                  </div>
+
+                  <div className="flex-grow">
+                    <h3 className="font-bold text-white mb-2 text-lg leading-snug">{svc.title}</h3>
+                    <p className="text-gray-400 text-sm leading-relaxed line-clamp-3">{svc.shortDesc}</p>
+                  </div>
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-1.5">
+                    {svc.techStack.slice(0, 3).map(t => (
+                      <span key={t} className="text-[10px] font-bold px-2 py-0.5 rounded bg-gray-800 text-gray-400 border border-gray-700">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="flex items-center justify-between pt-2 border-t border-white/5">
+                    <span className="text-sm font-black" style={{ color: domain.accentHex }}>
+                      from {svc.basePrice.toLocaleString()} TND
+                    </span>
+                    <span
+                      className="text-xs font-bold flex items-center gap-1 opacity-50 group-hover:opacity-100 group-hover:gap-2 transition-all"
+                      style={{ color: domain.accentHex }}
+                    >
+                      View details <ChevronRight className="w-3.5 h-3.5" />
+                    </span>
+                  </div>
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Other domains â†’ Capability Cards */}
+          {!isWebDev && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {capabilities.map((cap, idx) => (
+                <div
+                  key={idx}
+                  className="glass-card rounded-2xl p-6 flex flex-col gap-4 transition-all duration-300 hover:-translate-y-1"
+                  style={{ borderColor: `${domain.accentHex}15` }}
+                >
+                  <div
+                    className="w-11 h-11 rounded-xl flex items-center justify-center"
+                    style={{ background: `${domain.accentHex}15`, border: `1px solid ${domain.accentHex}30` }}
+                  >
+                    <Icon name={cap.iconName} size={20} color={domain.accentHex} />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-white mb-2 leading-snug">{cap.title}</h3>
+                    <p className="text-gray-400 text-sm leading-relaxed">{cap.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* â”€â”€ Tech Stack â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      <section className="py-16 border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-6">
+          <h3 className="text-2xl font-black text-white mb-8">Technology Stack</h3>
+          <div className="flex flex-wrap gap-3">
+            {domain.techStack.map(tech => (
+              <span
+                key={tech}
+                className="px-5 py-2.5 rounded-xl font-bold text-sm backdrop-blur-md transition-all hover:brightness-125"
+                style={{
+                  background: `${domain.accentHex}12`,
+                  color: domain.accentHex,
+                  border: `1px solid ${domain.accentHex}35`,
+                }}
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* â”€â”€ What You Get â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      <section className="py-16 border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="glass-card rounded-3xl p-10">
+            <h3 className="text-2xl font-black text-white mb-8">What's Included in Every License</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+              {[
+                'Compiled production binary (JAR / Docker image)',
+                'Full deployment documentation',
+                'API endpoint reference & examples',
+                'Environment configuration guide',
+                '30-day integration support',
+                'Security hardening checklist',
+                isWebDev ? 'Postman collection included' : 'Architecture diagram & data flow',
+                'Docker Compose setup file',
+                'Enterprise: Full source code access',
+              ].map(item => (
+                <div key={item} className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: domain.accentHex }} />
+                  <span className="text-gray-300 text-sm">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* â”€â”€ Contact Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      <section id="contact-section" className="py-20 border-t border-white/5">
+        <div className="max-w-2xl mx-auto px-6">
+          <div className="text-center mb-10">
+            <div
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold mb-6"
+              style={{ background: `${domain.accentHex}18`, color: domain.accentHex, border: `1px solid ${domain.accentHex}40` }}
+            >
+              <Icon name={domain.iconName} size={14} color={domain.accentHex} />
+              Interested in {domain.title}?
+            </div>
+            <h2 className="text-4xl font-black text-white mb-4">Request a Technical Briefing</h2>
+            <p className="text-gray-400">
+              Fill out the form below and we'll prepare a full architecture overview and pricing proposal for your use case.
+            </p>
+          </div>
+
+          <div
+            className="rounded-3xl p-8 md:p-10"
+            style={{
+              background: 'rgba(10, 10, 20, 0.7)',
+              border: `1px solid ${domain.accentHex}25`,
+              backdropFilter: 'blur(20px)',
+            }}
+          >
+            <ContactForm domainTitle={domain.title} accentHex={domain.accentHex} />
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+
+============================================================
+FILE: E:\Platform_dev_tool_Onboarding\showcasing\src\components\Icon.tsx
+============================================================
+import * as LucideIcons from 'lucide-react';
+
+interface IconProps {
+  name: string;
+  className?: string;
+  size?: number;
+  color?: string;
+}
+
+const icons = LucideIcons as unknown as Record<string, React.FC<{ className?: string; size?: number; color?: string }>>;
+
+export default function Icon({ name, className, size = 24, color }: IconProps) {
+  const LucideIcon = icons[name];
+  if (!LucideIcon) {
+    const Fallback = icons['HelpCircle'];
+    return <Fallback className={className} size={size} color={color} />;
+  }
+  return <LucideIcon className={className} size={size} color={color} />;
+}
+
+
+============================================================
+FILE: E:\Platform_dev_tool_Onboarding\showcasing\src\components\ContactForm.tsx
+============================================================
+import { useState } from 'react';
+import { Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
+import { EMAIL_CONFIG } from '../emailConfig';
+
+interface ContactFormProps {
+  domainTitle?: string;
+  serviceTitle?: string;
+  accentHex?: string;
+}
+
+export default function ContactForm({ domainTitle, serviceTitle, accentHex = '#6366f1' }: ContactFormProps) {
+  const [form, setForm] = useState({
+    from_name: '',
+    from_email: '',
+    company: '',
+    interest: domainTitle || serviceTitle || '',
+    message: '',
+  });
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMsg, setErrorMsg] = useState('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.from_name.trim() || !form.from_email.trim() || !form.message.trim()) {
+      setErrorMsg('Please fill in name, email, and message before sending.');
+      return;
+    }
+    setStatus('loading');
+    setErrorMsg('');
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s timeout
+
+    try {
+      // Call the relay backend (configured in emailConfig.ts)
+      const response = await fetch(`${EMAIL_CONFIG.API_URL}/api/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ error: response.statusText }));
+        throw new Error(errorData.error || `Server returned ${response.status}`);
+      }
+
+      setStatus('success');
+    } catch (err: any) {
+      clearTimeout(timeoutId);
+      console.error('[Backend Error]', err);
+      setStatus('error');
+      
+      let msg = err.message || 'The email backend could not be reached.';
+      if (err.name === 'AbortError') {
+        msg = 'Connection timed out. The server is taking too long to respond.';
+      }
+      setErrorMsg(msg);
+    }
+  };
+
+  if (status === 'success') {
+    return (
+      <div className="flex flex-col items-center justify-center py-14 gap-5 text-center">
+        <div
+          className="w-20 h-20 rounded-full flex items-center justify-center"
+          style={{ background: `${accentHex}20`, border: `1px solid ${accentHex}50` }}
+        >
+          <CheckCircle className="w-10 h-10" style={{ color: accentHex }} />
+        </div>
+        <div>
+          <h3 className="text-2xl font-black text-white mb-2">Message Delivered!</h3>
+          <p className="text-gray-400 text-sm max-w-xs">
+            Our technical team will contact you within 24 hours.
+          </p>
+        </div>
+        <button
+          onClick={() => { setStatus('idle'); setForm({ from_name: '', from_email: '', company: '', interest: domainTitle || serviceTitle || '', message: '' }); }}
+          className="text-sm font-semibold underline underline-offset-4 transition-opacity hover:opacity-70"
+          style={{ color: accentHex }}
+        >
+          Send another message
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-widest">Full Name *</label>
+          <input
+            name="from_name"
+            type="text"
+            value={form.from_name}
+            onChange={handleChange}
+            placeholder="John Doe"
+            className="w-full bg-black/40 border-2 border-gray-800 rounded-xl py-3.5 px-4 text-sm text-white focus:outline-none focus:border-indigo-500 transition-all placeholder:text-gray-600"
+          />
+        </div>
+        <div>
+          <label className="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-widest">Email *</label>
+          <input
+            name="from_email"
+            type="email"
+            value={form.from_email}
+            onChange={handleChange}
+            placeholder="john@example.com"
+            className="w-full bg-black/40 border-2 border-gray-800 rounded-xl py-3.5 px-4 text-sm text-white focus:outline-none focus:border-indigo-500 transition-all placeholder:text-gray-600"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label className="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-widest">Company (optional)</label>
+        <input
+          name="company"
+          type="text"
+          value={form.company}
+          onChange={handleChange}
+          placeholder="Acme Corp"
+          className="w-full bg-black/40 border-2 border-gray-800 rounded-xl py-3.5 px-4 text-sm text-white focus:outline-none focus:border-indigo-500 transition-all placeholder:text-gray-600"
+        />
+      </div>
+
+      {!domainTitle && !serviceTitle && (
+        <div>
+          <label className="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-widest">Area of Interest</label>
+          <input
+            name="interest"
+            type="text"
+            value={form.interest}
+            onChange={handleChange}
+            placeholder="e.g. Web Dev, IoT, AI/ML..."
+            className="w-full bg-black/40 border-2 border-gray-800 rounded-xl py-3.5 px-4 text-sm text-white focus:outline-none focus:border-indigo-500 transition-all placeholder:text-gray-600"
+          />
+        </div>
+      )}
+
+      {(domainTitle || serviceTitle) && (
+        <div className="flex items-center gap-2">
+          <span className="text-xs text-gray-500">Interest:</span>
+          <span
+            className="text-xs font-bold px-3 py-1 rounded-full"
+            style={{ background: `${accentHex}20`, color: accentHex, border: `1px solid ${accentHex}40` }}
+          >
+            {domainTitle || serviceTitle}
+          </span>
+        </div>
+      )}
+
+      <div>
+        <label className="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-widest">Message *</label>
+        <textarea
+          name="message"
+          value={form.message}
+          onChange={handleChange}
+          rows={4}
+          placeholder="Describe your requirements..."
+          className="w-full bg-black/40 border-2 border-gray-800 rounded-xl py-3.5 px-4 text-sm text-white focus:outline-none focus:border-indigo-500 transition-all resize-none placeholder:text-gray-600"
+        />
+      </div>
+
+      {(errorMsg || status === 'error') && (
+        <div className="flex items-center gap-2 text-red-400 text-sm bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3">
+          <AlertCircle className="w-4 h-4 flex-shrink-0" />
+          {errorMsg || 'Failed to send email. Ensure the backend is running.'}
+        </div>
+      )}
+
+      <button
+        type="submit"
+        disabled={status === 'loading'}
+        className="w-full py-4 rounded-2xl font-extrabold text-white text-base transition-all flex items-center justify-center gap-3 disabled:opacity-60 shadow-lg hover:brightness-110 active:scale-[0.98]"
+        style={{
+          background: `linear-gradient(135deg, ${accentHex}, ${accentHex}bb)`,
+          boxShadow: `0 0 40px -10px ${accentHex}`,
+        }}
+      >
+        {status === 'loading' ? (
+          <><Loader2 className="w-5 h-5 animate-spin" /> Informing Serverâ€¦</>
+        ) : (
+          <><Send className="w-5 h-5" /> Request Technical Briefing</>
+        )}
+      </button>
+    </form>
+  );
+}
+
+
+============================================================
+FILE: E:\Platform_dev_tool_Onboarding\showcasing\src\components\Carousel.tsx
+============================================================
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+
+export interface CarouselItem {
+  title: string;
+  description: string;
+  image: string;
+  tag?: string;
+  link?: string;
+}
+
+interface CarouselProps {
+  items: CarouselItem[];
+  accentColor?: string;
+  autoPlayInterval?: number;
+  className?: string;
+}
+
+export default function Carousel({ 
+  items, 
+  accentColor = '#6366f1', 
+  autoPlayInterval = 5000,
+  className = ""
+}: CarouselProps) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const timerRef = useRef<number | null>(null);
+
+  const nextSlide = useCallback(() => {
+    setCurrentIndex((prev) => (prev === items.length - 1 ? 0 : prev + 1));
+  }, [items.length]);
+
+  const prevSlide = useCallback(() => {
+    setCurrentIndex((prev) => (prev === 0 ? items.length - 1 : prev - 1));
+  }, [items.length]);
+
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index);
+  };
+
+  // â”€â”€ Auto-play Logic â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  useEffect(() => {
+    if (items.length <= 1) return;
+
+    if (!isHovered) {
+      timerRef.current = window.setInterval(nextSlide, autoPlayInterval);
+    }
+
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [isHovered, nextSlide, autoPlayInterval, items.length]);
+
+  if (!items || items.length === 0) return null;
+
+  return (
+    <div 
+      className={`relative group w-full overflow-hidden rounded-[32px] glass-card border border-white/10 ${className}`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Background Ambient Glow */}
+      <div 
+        className="absolute inset-0 opacity-20 blur-[100px] pointer-events-none transition-colors duration-1000"
+        style={{ background: accentColor }}
+      />
+
+      <div className="relative aspect-[16/9] md:aspect-[21/9] overflow-hidden">
+        {items.map((item, idx) => (
+          <div
+            key={`${item.title}-${idx}`}
+            className={`absolute inset-0 transition-all duration-700 ease-in-out flex flex-col md:flex-row ${
+              idx === currentIndex ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12 pointer-events-none'
+            }`}
+          >
+            {/* Image Section */}
+            <div className="w-full md:w-2/3 h-full relative overflow-hidden">
+                <img 
+                  src={item.image} 
+                  alt={item.title} 
+                  loading="lazy"
+                  className="w-full h-full object-cover transition-transform duration-[3000ms] hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/20 to-transparent" />
+            </div>
+
+            {/* Content Section */}
+            <div className="w-full md:w-1/3 bg-black/60 backdrop-blur-xl p-8 md:p-12 flex flex-col justify-center border-l border-white/5 relative z-10">
+              {item.tag && (
+                <span 
+                  className="inline-block self-start px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest mb-4 border"
+                  style={{ color: accentColor, borderColor: `${accentColor}40`, backgroundColor: `${accentColor}10` }}
+                >
+                  {item.tag}
+                </span>
+              )}
+              <h3 className="text-2xl md:text-3xl font-black text-white mb-4 leading-tight">
+                {item.title}
+              </h3>
+              <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-8">
+                {item.description}
+              </p>
+              
+              <div className="mt-auto flex items-center gap-4">
+                 <div className="flex gap-2">
+                    {items.map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={() => goToSlide(i)}
+                        className={`h-1.5 rounded-full transition-all duration-300 ${
+                          i === currentIndex ? 'w-10' : 'w-2 bg-white/20'
+                        }`}
+                        style={{ backgroundColor: i === currentIndex ? accentColor : undefined }}
+                        aria-label={`Go to slide ${i + 1}`}
+                      />
+                    ))}
+                 </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Navigation Controls */}
+      <div className="absolute inset-0 flex items-center justify-between p-6 pointer-events-none">
+        <button
+          onClick={prevSlide}
+          className="pointer-events-auto w-12 h-12 rounded-full bg-black/20 border border-white/10 flex items-center justify-center text-white backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all hover:bg-white/10 active:scale-90"
+          aria-label="Previous slide"
+        >
+          <ChevronLeft className="w-6 h-6" />
+        </button>
+        
+        {/* The "Next" button layout differs slightly for Desktop vs Mobile to avoid overlapping content */}
+        <div className="flex items-center gap-4 pointer-events-none">
+          <button
+            onClick={nextSlide}
+            className="pointer-events-auto hidden md:flex mr-[33.33%] w-12 h-12 rounded-full bg-black/20 border border-white/10 items-center justify-center text-white backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all hover:bg-white/10 active:scale-90"
+            aria-label="Next slide"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+          
+          <button
+            onClick={nextSlide}
+            className="pointer-events-auto md:hidden w-10 h-10 rounded-full bg-black/20 border border-white/10 flex items-center justify-center text-white backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all hover:bg-white/10"
+            aria-label="Next slide mobile"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+
+============================================================
+FILE: E:\Platform_dev_tool_Onboarding\showcasing\api\contact.js
+============================================================
+import nodemailer from 'nodemailer';
+
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method Not Allowed' });
+  }
+
+  const { from_name, from_email, company, interest, message } = req.body;
+
+  // Use the SAME credentials from your server.cjs
+  const GMAIL_USER = process.env.GMAIL_USER || 'marketbusinessofall@gmail.com';
+  const GMAIL_PASS = process.env.GMAIL_PASS || 'ilqu xofv bqsx uacs';
+
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false, 
+    auth: {
+      user: GMAIL_USER,
+      pass: GMAIL_PASS,
+    },
+  });
+
+  const mailOptions = {
+    from: `"Inquiry: ${from_name}" <${GMAIL_USER}>`,
+    to: GMAIL_USER,
+    replyTo: from_email,
+    subject: `New Inquiry: ${interest} - from ${from_name}`,
+    html: `
+      <div style="font-family: sans-serif; padding: 20px; color: #333;">
+        <h2 style="color: #6366f1;">New Inquiry from Showcasing Platform</h2>
+        <p><strong>Name:</strong> ${from_name}</p>
+        <p><strong>Email:</strong> ${from_email}</p>
+        <p><strong>Company:</strong> ${company || 'N/A'}</p>
+        <p><strong>Area of Interest:</strong> ${interest}</p>
+        <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
+        <p><strong>Message:</strong></p>
+        <div style="background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; line-height: 1.6;">
+          ${message.replace(/\n/g, '<br/>')}
+        </div>
+      </div>
+    `,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    return res.status(200).json({ message: 'Email sent successfully!' });
+  } catch (error) {
+    console.error('Vercel Function Error:', error);
+    return res.status(500).json({ error: error.message || 'Failed to send email via Vercel Function.' });
+  }
+}
+
+
