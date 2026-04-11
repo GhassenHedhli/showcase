@@ -33,6 +33,7 @@ app.post('/api/contact', async (req, res) => {
       <h3>New Inquiry from Showcasing Platform</h3>
       <p><strong>Name:</strong> ${from_name}</p>
       <p><strong>Email:</strong> ${from_email}</p>
+      <p><strong>Phone:</strong> ${req.body.phone || 'N/A'}</p>
       <p><strong>Company:</strong> ${company || 'N/A'}</p>
       <p><strong>Area of Interest:</strong> ${interest}</p>
       <p><strong>Message:</strong></p>

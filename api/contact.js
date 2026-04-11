@@ -31,6 +31,7 @@ export default async function handler(req, res) {
         <h2 style="color: #6366f1;">New Inquiry from Showcasing Platform</h2>
         <p><strong>Name:</strong> ${from_name}</p>
         <p><strong>Email:</strong> ${from_email}</p>
+        <p><strong>Phone:</strong> ${req.body.phone || 'N/A'}</p>
         <p><strong>Company:</strong> ${company || 'N/A'}</p>
         <p><strong>Area of Interest:</strong> ${interest}</p>
         <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">

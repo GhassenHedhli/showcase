@@ -4,8 +4,8 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const EMAIL_CONFIG = {
-  // Relative path (preferred for Vercel) or fallback for development
-  API_URL: import.meta.env.VITE_API_URL || '',
+  // Fallback to local server (3001) if no env var is provided
+  API_URL: import.meta.env.VITE_API_URL || 'http://localhost:3001',
 
   // Recipient (main business contact)
   TO_EMAIL: 'marketbusinessofall@gmail.com',

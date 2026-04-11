@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
+import { Send, CheckCircle, AlertCircle, Loader2, ChevronDown } from 'lucide-react';
 import { EMAIL_CONFIG } from '../emailConfig';
 
 interface ContactFormProps {
@@ -8,10 +8,36 @@ interface ContactFormProps {
   accentHex?: string;
 }
 
+const COUNTRIES = [
+  { code: '+216', flag: '🇹🇳', name: 'Tunisia' },
+  { code: '+1',   flag: '🇺🇸', name: 'United States & Canada' },
+  { code: '+44',  flag: '🇬🇧', name: 'United Kingdom' },
+  { code: '+33',  flag: '🇫🇷', name: 'France' },
+  { code: '+49',  flag: '🇩🇪', name: 'Germany' },
+  { code: '+39',  flag: '🇮🇹', name: 'Italy' },
+  { code: '+34',  flag: '🇪🇸', name: 'Spain' },
+  { code: '+32',  flag: '🇧🇪', name: 'Belgium' },
+  { code: '+41',  flag: '🇨🇭', name: 'Switzerland' },
+  { code: '+31',  flag: '🇳🇱', name: 'Netherlands' },
+  { code: '+971', flag: '🇦🇪', name: 'United Arab Emirates' },
+  { code: '+966', flag: '🇸🇦', name: 'Saudi Arabia' },
+  { code: '+212', flag: '🇲🇦', name: 'Morocco' },
+  { code: '+213', flag: '🇩🇿', name: 'Algeria' },
+  { code: '+20',  flag: '🇪🇬', name: 'Egypt' },
+  { code: '+27',  flag: '🇿🇦', name: 'South Africa' },
+  { code: '+81',  flag: '🇯🇵', name: 'Japan' },
+  { code: '+86',  flag: '🇨🇳', name: 'China' },
+  { code: '+91',  flag: '🇮🇳', name: 'India' },
+  { code: '+61',  flag: '🇦🇺', name: 'Australia' },
+  { code: '+55',  flag: '🇧🇷', name: 'Brazil' },
+  { code: '+52',  flag: '🇲🇽', name: 'Mexico' },
+];
 export default function ContactForm({ domainTitle, serviceTitle, accentHex = '#06b6d4' }: ContactFormProps) {
   const [form, setForm] = useState({
     from_name: '',
     from_email: '',
+    phone: '',
+    countryCode: '+216',
     company: '',
     interest: domainTitle || serviceTitle || '',
     message: '',
@@ -25,22 +51,32 @@ export default function ContactForm({ domainTitle, serviceTitle, accentHex = '#0
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.from_name.trim() || !form.from_email.trim() || !form.message.trim()) {
-      setErrorMsg('Please fill in name, email, and message before sending.');
+    
+    // Basic validation
+    if (!form.from_name.trim() || !form.from_email.trim() || !form.phone.trim() || !form.message.trim()) {
+      setErrorMsg('All fields marked with * are required.');
       return;
     }
+
+    // Phone Verification (digits only for the local part)
+    const localPhone = form.phone.replace(/\s+/g, '');
+    if (!/^\d{4,15}$/.test(localPhone)) {
+      setErrorMsg('Please enter a valid phone number.');
+      return;
+    }
+
+    const fullPhone = `${form.countryCode}${localPhone}`;
     setStatus('loading');
     setErrorMsg('');
 
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s timeout
+    const timeoutId = setTimeout(() => controller.abort(), 15000); 
 
     try {
-      // Call the relay backend (configured in emailConfig.ts)
       const response = await fetch(`${EMAIL_CONFIG.API_URL}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, phone: fullPhone }),
         signal: controller.signal,
       });
 
@@ -81,7 +117,7 @@ export default function ContactForm({ domainTitle, serviceTitle, accentHex = '#0
           </p>
         </div>
         <button
-          onClick={() => { setStatus('idle'); setForm({ from_name: '', from_email: '', company: '', interest: domainTitle || serviceTitle || '', message: '' }); }}
+          onClick={() => { setStatus('idle'); setForm({ from_name: '', from_email: '', phone: '', countryCode: '+216', company: '', interest: domainTitle || serviceTitle || '', message: '' }); }}
           className="text-sm font-semibold underline underline-offset-4 transition-opacity hover:opacity-70"
           style={{ color: accentHex }}
         >
@@ -116,6 +152,42 @@ export default function ContactForm({ domainTitle, serviceTitle, accentHex = '#0
             placeholder="john@example.com"
             style={{ borderColor: form.from_email ? accentHex + '50' : '' }}
             className="w-full bg-black/40 border-2 border-gray-800 rounded-xl py-3.5 px-4 text-sm text-white focus:outline-none transition-all placeholder:text-gray-600 focus:ring-1"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label className="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-widest">Phone Number *</label>
+        <div className="flex gap-2">
+          {/* Country Selector */}
+          <div className="relative">
+            <select
+              name="countryCode"
+              value={form.countryCode}
+              onChange={(e) => setForm(f => ({ ...f, countryCode: e.target.value }))}
+              className="appearance-none bg-black/40 border-2 border-gray-800 rounded-xl py-3.5 pl-4 pr-10 text-sm text-white focus:outline-none transition-all focus:ring-1 cursor-pointer w-[140px]"
+              style={{ borderColor: accentHex + '30' }}
+            >
+              {COUNTRIES.map(c => (
+                <option key={c.name} value={c.code} className="bg-gray-900">
+                  {c.flag} {c.code}
+                </option>
+              ))}
+            </select>
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+              <ChevronDown size={14} />
+            </div>
+          </div>
+
+          {/* Number Input */}
+          <input
+            name="phone"
+            type="tel"
+            value={form.phone}
+            onChange={handleChange}
+            placeholder="12 345 678"
+            style={{ borderColor: form.phone ? accentHex + '50' : '' }}
+            className="flex-1 bg-black/40 border-2 border-gray-800 rounded-xl py-3.5 px-4 text-sm text-white focus:outline-none transition-all placeholder:text-gray-600 focus:ring-1"
           />
         </div>
       </div>
