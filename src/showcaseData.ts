@@ -10,7 +10,8 @@ export interface ShowcaseItem {
   domainId?: string; // Optional: bind to a specific domain
   title: string;
   description: string;
-  image: string;
+  image?: string;
+  video?: string;
   tag?: string;
 }
 
@@ -25,6 +26,12 @@ export const globalShowcaseItems: ShowcaseItem[] = [
 
 export const domainShowcaseItems: Record<string, ShowcaseItem[]> = {
   'web-dev': [
+    {
+      title: "Platform Live Demo",
+      description: "Watch the complete microservices ecosystem in action — from authentication and real-time chat to ecommerce, payments, and the admin control center.",
+      video: "/presentation.mp4",
+      tag: "Live Demo"
+    },
     {
       title: "Authentication & Identity",
       description: "Secure JWT-based authentication system with RBAC, social login, and MFA capabilities.",
