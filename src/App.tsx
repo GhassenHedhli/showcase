@@ -96,7 +96,7 @@ function Header() {
             </button>
           ))}
           <a
-            href="http://localhost:5173"
+            href="https://showcase-nu-orcin.vercel.app/"
             target="_blank"
             rel="noreferrer"
             className="flex items-center gap-2 px-4 py-3 mt-2 rounded-xl border border-white/10 bg-white/5 text-white font-bold text-sm"
