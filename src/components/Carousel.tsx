@@ -140,37 +140,39 @@ export default function Carousel({
                 </div>
               </div>
             ) : (
-              /* ── IMAGE SLIDE: Original side-by-side layout ── */
-              <>
-                <div className="w-full md:w-2/3 h-full relative overflow-hidden bg-black">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-[4000ms] ease-out hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/30 to-transparent" />
-                </div>
+              /* ── IMAGE SLIDE: Full-width uncropped layout ── */
+              <div className="relative w-full h-full bg-[#020205]">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  loading="lazy"
+                  className="w-full h-full object-contain p-2 md:p-8 transition-transform duration-[4000ms] ease-out hover:scale-[1.02]"
+                />
+                
+                {/* Bottom gradient scrim + text overlay */}
+                <div className="absolute bottom-0 left-0 right-0 z-10 pointer-events-none"
+                  style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 50%, transparent 100%)' }}
+                >
+                  <div className="pt-24 pb-8 px-8 md:px-12 pointer-events-auto flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div className="flex-1">
+                      {item.tag && (
+                        <span
+                          className="inline-block px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest mb-3 border backdrop-blur-md"
+                          style={{ color: accentColor, borderColor: `${accentColor}40`, backgroundColor: `${accentColor}15` }}
+                        >
+                          {item.tag}
+                        </span>
+                      )}
+                      <h3 className="text-2xl md:text-4xl font-black text-white mb-2 leading-tight drop-shadow-lg">
+                        {item.title}
+                      </h3>
+                      <p className="text-gray-300 text-sm md:text-lg leading-relaxed max-w-3xl opacity-90 drop-shadow-md">
+                        {item.description}
+                      </p>
+                    </div>
 
-                {/* Content sidebar */}
-                <div className="w-full md:w-1/3 bg-[#05050a]/80 backdrop-blur-3xl p-8 md:p-12 flex flex-col justify-center border-l border-white/5 relative z-10">
-                  {item.tag && (
-                    <span
-                      className="inline-block self-start px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest mb-4 border"
-                      style={{ color: accentColor, borderColor: `${accentColor}40`, backgroundColor: `${accentColor}10` }}
-                    >
-                      {item.tag}
-                    </span>
-                  )}
-                  <h3 className="text-2xl md:text-4xl font-black text-white mb-6 leading-tight">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-400 text-sm md:text-lg leading-relaxed mb-10">
-                    {item.description}
-                  </p>
-
-                  <div className="mt-auto flex items-center gap-4">
-                    <div className="flex gap-2">
+                    {/* Dot indicators */}
+                    <div className="flex gap-2 shrink-0 md:mb-2">
                       {items.map((_, i) => (
                         <button
                           key={i}
@@ -185,7 +187,7 @@ export default function Carousel({
                     </div>
                   </div>
                 </div>
-              </>
+              </div>
             )}
           </div>
         ))}
@@ -202,13 +204,11 @@ export default function Carousel({
           <ChevronLeft className="w-6 h-6" />
         </button>
         
-        {/* The "Next" button position adjusts based on layout (Video=Full, Image=2/3 split) */}
+        {/* The "Next" button is positioned at the far right edge */}
         <div className="flex items-center gap-4 pointer-events-none w-full justify-end">
           <button
             onClick={nextSlide}
-            className={`pointer-events-auto hidden md:flex w-12 h-12 rounded-full bg-black/20 border border-white/10 items-center justify-center text-white backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all hover:bg-white/10 active:scale-90 ${
-              items[currentIndex]?.video ? 'mr-0' : 'mr-[33.33%]'
-            }`}
+            className="pointer-events-auto hidden md:flex w-12 h-12 rounded-full bg-black/20 border border-white/10 items-center justify-center text-white backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all hover:bg-white/10 active:scale-90 mr-0"
             aria-label="Next slide"
           >
             <ChevronRight className="w-6 h-6" />

@@ -1,6 +1,23 @@
 import dashboardImg from './assets/showcase/dashboard.png';
-import ecommerceImg from './assets/showcase/ecommerce.png';
 import iotImg from './assets/showcase/iot.png';
+
+// New images
+import adminConsoleImg from './assets/showcase/admin-console.png';
+import filesImg from './assets/showcase/files.png';
+import iot1Img from './assets/showcase/iot1.png';
+import messagesImg from './assets/showcase/messages.png';
+import mlImg from './assets/showcase/ml.png';
+import ml1Img from './assets/showcase/ml1.png';
+import ml2Img from './assets/showcase/ml2.png';
+import ml3Img from './assets/showcase/ml3.png';
+import ml4Img from './assets/showcase/ml4.png';
+import paymentImg from './assets/showcase/payment.png';
+import preferencesImg from './assets/showcase/prefrences.png';
+import privacyImg from './assets/showcase/privacy.png';
+import profileImg from './assets/showcase/profile.png';
+import securityImg from './assets/showcase/security.png';
+import tasksImg from './assets/showcase/tasks.png';
+import tasks2Img from './assets/showcase/tasks2.png';
 
 // ── Showcase Items ──────────────────────────────────────────────────────────
 // Add your images to src/assets/showcase/ then import and add them below.
@@ -19,7 +36,7 @@ export const globalShowcaseItems: ShowcaseItem[] = [
   {
     title: "Scalable Architecture",
     description: "Built for million-user scale with distributed caching, service discovery, and automated horizontal scaling.",
-    image: dashboardImg,
+    image: adminConsoleImg,
     tag: "Performance"
   },
 ];
@@ -29,31 +46,31 @@ export const domainShowcaseItems: Record<string, ShowcaseItem[]> = {
     {
       title: "Platform Live Demo",
       description: "Watch the complete microservices ecosystem in action — from authentication and real-time chat to ecommerce, payments, and the admin control center.",
-      video: "/presentation.mp4",
+      image: dashboardImg,
       tag: "Live Demo"
     },
     {
       title: "Authentication & Identity",
       description: "Secure JWT-based authentication system with RBAC, social login, and MFA capabilities.",
-      image: dashboardImg,
+      image: securityImg,
       tag: "Security"
     },
     {
       title: "Billing & Subscription",
       description: "Full Stripe integration for managing plan tiers, metered billing, and automated invoicing.",
-      image: ecommerceImg,
+      image: paymentImg,
       tag: "Fintech"
     },
     {
-      title: "Smart Search Engine",
-      description: "Elasticsearch-powered full-text search with fuzzy matching and real-time indexing.",
-      image: dashboardImg,
-      tag: "Discovery"
+      title: "User Management & Privacy",
+      description: "Comprehensive profiles with granular privacy controls, preferences, and activity tracking.",
+      image: privacyImg,
+      tag: "Identity"
     },
     {
       title: "File Storage & CDN",
       description: "Scalable object storage integration with local/S3 support and automated image optimization.",
-      image: dashboardImg,
+      image: filesImg,
       tag: "Infrastructure"
     }
   ],
@@ -67,7 +84,7 @@ export const domainShowcaseItems: Record<string, ShowcaseItem[]> = {
     {
       title: "Protocol Gateway",
       description: "Multi-protocol ingestion handling MQTT, HTTP, and CoAP with sub-10ms latency.",
-      image: iotImg,
+      image: iot1Img,
       tag: "Connectivity"
     },
     {
@@ -81,13 +98,13 @@ export const domainShowcaseItems: Record<string, ShowcaseItem[]> = {
     {
       title: "Offline Sync Engine",
       description: "Delta-sync logic that keeps mobile apps functional in zero-connectivity environments.",
-      image: ecommerceImg,
+      image: profileImg,
       tag: "Native"
     },
     {
       title: "Push Notification Hub",
       description: "Unified FCM/APNs gateway for transactional and marketing notifications.",
-      image: ecommerceImg,
+      image: messagesImg,
       tag: "Engagement"
     }
   ],
@@ -95,13 +112,13 @@ export const domainShowcaseItems: Record<string, ShowcaseItem[]> = {
     {
       title: "Data Orchestration",
       description: "Airflow-based DAGs for managing complex ETL workflows across siloed data sources.",
-      image: dashboardImg,
+      image: tasks2Img,
       tag: "Pipelines"
     },
     {
       title: "Power BI Connectors",
       description: "Direct-push datasets that keep your executive dashboards updated in real-time.",
-      image: dashboardImg,
+      image: adminConsoleImg,
       tag: "Insights"
     }
   ],
@@ -109,27 +126,33 @@ export const domainShowcaseItems: Record<string, ShowcaseItem[]> = {
     {
       title: "RAG Knowledge Base",
       description: "Retrieval-Augmented Generation pipeline using vector databases for grounded AI answers.",
-      image: dashboardImg,
+      image: mlImg,
       tag: "GenAI"
     },
     {
       title: "Recommendation Engine",
       description: "Collaborative filtering models serving personalized content in under 50ms.",
-      image: dashboardImg,
+      image: ml2Img,
       tag: "ML Ops"
+    },
+    {
+      title: "Predictive Analytics",
+      description: "Time-series forecasting models identifying trends and predicting user churn.",
+      image: ml4Img,
+      tag: "Analytics"
     }
   ],
   'devops': [
     {
       title: "Kubernetes Orchestration",
       description: "Automated scaling and self-healing for distributed containerized workloads.",
-      image: dashboardImg,
+      image: adminConsoleImg,
       tag: "Platform"
     },
     {
       title: "CI/CD Automation",
       description: "Zero-downtime deployment pipelines with integrated security scanning.",
-      image: dashboardImg,
+      image: tasksImg,
       tag: "Automation"
     }
   ],
@@ -137,13 +160,13 @@ export const domainShowcaseItems: Record<string, ShowcaseItem[]> = {
     {
       title: "XR Interactive Scene",
       description: "Immersive VR/AR environments for industrial training and product visualization.",
-      image: iotImg,
+      image: ml3Img,
       tag: "XR"
     },
     {
       title: "WebXR Discovery",
       description: "High-performance 3D visualization running directly in modern web browsers.",
-      image: iotImg,
+      image: ml1Img,
       tag: "Web 3D"
     }
   ],
@@ -151,7 +174,7 @@ export const domainShowcaseItems: Record<string, ShowcaseItem[]> = {
     {
       title: "Atomic Design System",
       description: "Standardized component library built for scale and interface consistency.",
-      image: dashboardImg,
+      image: preferencesImg,
       tag: "Design"
     },
     {
@@ -169,7 +192,7 @@ export const domainShowcaseItems: Record<string, ShowcaseItem[]> = {
  */
 export function getShowcaseItems(domainId: string): ShowcaseItem[] {
   const specificItems = domainShowcaseItems[domainId] || [];
-  
+
   // Custom logic: if no specific items, show a general one
   if (specificItems.length === 0) {
     return [

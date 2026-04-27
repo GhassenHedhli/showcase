@@ -4,7 +4,8 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const EMAIL_CONFIG = {
-  // Fallback to the live Render backend if no env var is provided
+  // Use a relative path in production since the frontend is served by the backend
+  // In development, fallback to the live Render backend
   API_URL: import.meta.env.VITE_API_URL || 'https://showcase-dajv.onrender.com',
 
   // Recipient (main business contact)

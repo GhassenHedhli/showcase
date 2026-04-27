@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 app.use(cors());
@@ -50,6 +51,14 @@ app.post('/api/contact', async (req, res) => {
     console.error('Nodemailer Error:', error);
     res.status(500).json({ error: error.message || 'Failed to send email.' });
   }
+});
+
+// Serve the static files from the Vite build
+app.use(express.static(path.join(__dirname, 'dist')));
+
+// Catch-all route to serve the React app for any unhandled paths (React Router fallback)
+app.use((req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 const PORT = process.env.PORT || 3001;
