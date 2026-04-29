@@ -70,7 +70,8 @@ export default function ContactForm({ domainTitle, serviceTitle, accentHex = '#0
     setErrorMsg('');
 
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 15000); 
+    // Fix #4: Render free tier cold starts can take 20-50s. 60s prevents false timeouts.
+    const timeoutId = setTimeout(() => controller.abort(), 60000);
 
     try {
       const response = await fetch(`${EMAIL_CONFIG.API_URL}/api/contact`, {
@@ -95,7 +96,7 @@ export default function ContactForm({ domainTitle, serviceTitle, accentHex = '#0
       
       let msg = err.message || 'The email backend could not be reached.';
       if (err.name === 'AbortError') {
-        msg = 'Connection timed out. The server is taking too long to respond.';
+        msg = 'Connection timed out after 60 seconds. The server may be waking up — please try again in a moment.';
       }
       setErrorMsg(msg);
     }
