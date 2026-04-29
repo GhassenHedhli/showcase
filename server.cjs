@@ -86,6 +86,8 @@ app.use((req, res) => {
 });
 
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`✅  Email Relay Backend running on port ${PORT}`);
+// Explicitly bind to 0.0.0.0 — required by Render (and most cloud hosts).
+// Binding to localhost only makes the port invisible to Render's port scanner.
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`✅  Email Relay Backend running on port ${PORT} (0.0.0.0)`);
 });
