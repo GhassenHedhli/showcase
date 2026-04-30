@@ -201,10 +201,10 @@ export const domains: Domain[] = [
     gradient: 'from-cyan-500 via-blue-600 to-indigo-700',
     glowColor: 'rgba(6,182,212,0.35)',
     accentHex: '#06b6d4',
-    badge: '15 Microservices',
+    badge: '15 Services',
     stats: [
-      { value: '15', label: 'Microservices' },
-      { value: '250–650', label: 'TND / Module' },
+      { value: '15', label: 'Services' },
+      { value: 'Voucher', label: 'For Students' },
       { value: '100%', label: 'REST API Coverage' },
       { value: 'Zero', label: 'Vendor Lock-in' },
     ],

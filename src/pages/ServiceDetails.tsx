@@ -14,16 +14,10 @@ const WEB_DEV_ACCENT = '#06b6d4';
 
 const tiers = [
   {
-    name: 'Standard Server License',
-    multiplier: 1,
-    desc: 'Compiled JAR binary + Docker image, suitable for standard production deployments.',
-    included: ['Production JAR / Docker image', 'Deployment documentation', 'API reference guide', 'Environment config guide', '30-day integration support'],
-  },
-  {
     name: 'Enterprise Source Code',
-    multiplier: 3.5,
+    multiplier: 1,
     desc: 'Full Java/Python source code with unlimited internal modification and redistribution rights.',
-    included: ['Everything in Standard', 'Complete source code', 'Unlimited modification rights', 'Architecture diagrams', 'Priority 90-day support'],
+    included: ['Production JAR / Docker image', 'Complete source code', 'Unlimited modification rights', 'Architecture diagrams', 'Priority 02-day support'],
   },
 ];
 
@@ -119,8 +113,8 @@ export default function ServiceDetails() {
             <h2 className="text-2xl font-black text-white mb-2">Implementation Preview</h2>
             <p className="text-gray-400">Visualizing the service in a production environment.</p>
           </div>
-          
-          <Carousel 
+
+          <Carousel
             items={[
               {
                 title: `${service.title} UI`,
@@ -211,11 +205,10 @@ export default function ServiceDetails() {
                   <button
                     key={idx}
                     onClick={() => setSelectedTier(idx)}
-                    className={`w-full text-left p-5 rounded-2xl border-2 transition-all duration-300 ${
-                      selectedTier === idx
+                    className={`w-full text-left p-5 rounded-2xl border-2 transition-all duration-300 ${selectedTier === idx
                         ? 'bg-indigo-500/10 border-indigo-500 ring-2 ring-indigo-500/20'
                         : 'bg-black/20 border-gray-800 hover:border-gray-600'
-                    }`}
+                      }`}
                   >
                     <div className="flex items-center justify-between mb-1.5">
                       <span className="font-bold text-gray-100">{tier.name}</span>
@@ -230,10 +223,10 @@ export default function ServiceDetails() {
 
               {/* Price */}
               <div className="mx-6 mb-6 p-5 bg-black/30 rounded-2xl border border-gray-800/50">
-                <span className="text-xs font-bold uppercase tracking-wider text-gray-500 block mb-2">License Investment</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-gray-500 block mb-2">Special Offer</span>
                 <div className="flex items-baseline gap-2">
                   <span
-                    className="text-5xl font-black"
+                    className="text-3xl font-black"
                     style={{
                       WebkitBackgroundClip: 'text',
                       WebkitTextFillColor: 'transparent',
@@ -241,9 +234,8 @@ export default function ServiceDetails() {
                       backgroundClip: 'text',
                     }}
                   >
-                    {price.toLocaleString()}
+                    Students Voucher
                   </span>
-                  <span className="text-xl font-bold text-gray-400">TND</span>
                 </div>
               </div>
             </div>
@@ -258,7 +250,7 @@ export default function ServiceDetails() {
                 Tell us your use case and we'll prepare a deployment proposal.
               </p>
               <ContactForm
-                serviceTitle={`${service.title} (${tiers[selectedTier].name} — ${price.toLocaleString()} TND)`}
+                serviceTitle={`${service.title} (Students Voucher)`}
                 accentHex={WEB_DEV_ACCENT}
               />
             </div>

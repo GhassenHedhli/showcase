@@ -187,7 +187,7 @@ export default function DomainPage() {
 
                   <div className="flex items-center justify-between pt-2 border-t border-white/5">
                     <span className="text-sm font-black" style={{ color: domain.accentHex }}>
-                      from {svc.basePrice.toLocaleString()} TND
+                      Students Voucher
                     </span>
                     <span
                       className="text-xs font-bold flex items-center gap-1 opacity-50 group-hover:opacity-100 group-hover:gap-2 transition-all"
