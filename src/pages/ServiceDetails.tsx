@@ -42,7 +42,6 @@ export default function ServiceDetails() {
     );
   }
 
-  const price = Math.round(service.basePrice * tiers[selectedTier].multiplier);
 
   return (
     <div className="w-full page-fade-in">
@@ -206,8 +205,8 @@ export default function ServiceDetails() {
                     key={idx}
                     onClick={() => setSelectedTier(idx)}
                     className={`w-full text-left p-5 rounded-2xl border-2 transition-all duration-300 ${selectedTier === idx
-                        ? 'bg-indigo-500/10 border-indigo-500 ring-2 ring-indigo-500/20'
-                        : 'bg-black/20 border-gray-800 hover:border-gray-600'
+                      ? 'bg-indigo-500/10 border-indigo-500 ring-2 ring-indigo-500/20'
+                      : 'bg-black/20 border-gray-800 hover:border-gray-600'
                       }`}
                   >
                     <div className="flex items-center justify-between mb-1.5">
